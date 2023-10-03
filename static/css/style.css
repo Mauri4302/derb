@@ -1,0 +1,19 @@
+.draggable-button {
+    width: 150px;
+    height: 40px;
+    border: 1px solid #000; /* Puedes personalizar el borde según tus necesidades */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.button-icon {
+    width: 20px; /* Ajusta el tamaño del ícono según tus necesidades */
+    height: 20px; /* Ajusta el tamaño del ícono según tus necesidades */
+    margin-right: 10px; /* Ajusta el espacio entre el ícono y el texto según tus necesidades */
+}
+
+.button-text {
+    margin: 0;
+}
