@@ -1,2 +1,57 @@
+
 {% extends 'gentelella/base.html' %}
-<h1>Hola</h1>
+{% load static %}
+{% block stylesheets %}
+<link href="{% static 'css/style.css' %}" rel="stylesheet">
+{% endblock stylesheets %}
+{% block content %}
+<div class="row">
+
+  <div class='col-sm-12 col-md-12 col-lg-12'>
+    <div class="card">
+      <div class="card-body">
+        <div class="card-title titles">
+          <h2> Numerical questions </h2>
+
+        </div>
+
+          <div class="row mb-4">
+              <div class="col-lg-2 col-md-2 col-sm-2">
+                <div class="card-title titles">
+          <h2> Componente</h2>
+
+        </div>
+          <div id="draggableTextBox" class="draggable-button">
+        <div class="centered-container cursor-pointer" draggable="true">
+            <img src="{% static 'image/svg.svg' %}" alt="icon" class="button-icon" draggable="false">
+            <p class="button-text mb-0">Text Box</p>
+        </div>
+    </div>
+    </div>
+
+              <div class="col-lg-6 col-md-6 col-sm-4">
+                  <div class="card-title titles">
+          <h2> Contenedor </h2>
+
+        </div>
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-2">
+                   <div class="card-title titles">
+          <h2> Caracteristicas </h2>
+
+        </div>
+              </div>
+          </div>
+           </div>
+
+      </div>
+
+    </div>
+
+
+
+  </div>
+
+
+</div>
+{% endblock %}
