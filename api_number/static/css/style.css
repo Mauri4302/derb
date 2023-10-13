@@ -1,21 +1,13 @@
-.draggable-button {
-    width: 180px;
-    height: 70px;
-    border: 1px solid #000; /* Puedes personalizar el borde según tus necesidades */
-    display: flex;
+/*.draggable-button {
+    width: 130px;
+    height: 50px;
+    /*border: 1px solid #000; *//* Puedes personalizar el borde según tus necesidades */
+   /* display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-}
+}*/
 
-centered-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centra los elementos horizontalmente */
-    justify-content: center; /* Centra los elementos verticalmente */
-    text-align: center; /* Alinea el texto al centro */
-
-}
 
 .button-icon {
     width: 80px; /* Ajusta el tamaño del ícono según tus necesidades */
@@ -25,4 +17,18 @@ centered-container {
 
 .button-text {
     margin-top: 5px;
+}
+
+#component, #contentParent, #caract, #content {
+    overflow-y: auto; /* Habilita el scroll vertical */
+    max-height: 800px !important;
+    min-height: 300px;
+}
+
+.activo{
+ background-color: red;
+}
+
+.deposito{
+    background-color: blue;
 }

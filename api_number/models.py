@@ -1,10 +1,11 @@
 from django.db import models
 
 # Create your models here.
-class InputValidation(models.Model):
+class InputSetting(models.Model):
+    placeholder = models.CharField(max_length=255)
     required = models.BooleanField(default=False)
-    minlength = models.PositiveIntegerField(default=0)
-    maxlength = models.PositiveIntegerField(default=100)
+    minlength = models.IntegerField(null=True)
+    maxlength = models.IntegerField(null=True)
     step = models.FloatField(default=1)
 
 class InputField(models.Model):
@@ -13,11 +14,21 @@ class InputField(models.Model):
         ('right', 'Right'),
         ('center', 'Center'),
     ]
-
+    type = models.CharField(max_length=30)
     label_alignment = models.CharField(max_length=10, choices=ALIGNMENT_CHOICES)
     label = models.CharField(max_length=255)
-    placeholder = models.CharField(max_length=255)
-    validations = models.OneToOneField(InputValidation, on_delete=models.CASCADE)
+    setting = models.OneToOneField(InputSetting, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.label
+
+class NumberInputField(InputField):
+    text_help = models.CharField(max_length=255, null=True)
+
+    def __str__(self):
+        return self.input_field+' - '+self.text_help
+
+class QuestionCondition(models.Model):
+    question_referent = models.ForeignKey(InputField, on_delete=models.CASCADE)
+    question = models.ManyToManyField(InputField, related_name='question')
+    condition = models.CharField(max_length=255, null=True)

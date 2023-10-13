@@ -1,10 +1,14 @@
 from rest_framework import serializers
-from .models import InputValidation, InputField
+from .models import InputSetting, InputField
 
 class InputValidationSerializer(serializers.ModelSerializer):
     class Meta:
-        model = InputValidation
+        model = InputSetting
         fields = ['id', 'required', 'minlength', 'maxlength', 'step']
+
+
+class ClassificationLabel:
+    objects = None
 
 
 class InputFieldSerializer(serializers.ModelSerializer):
@@ -13,3 +17,6 @@ class InputFieldSerializer(serializers.ModelSerializer):
     class Meta:
         model = InputField
         fields = ['id', 'label_alignment', 'label', 'placeholder', 'validations']
+
+    def create(self, validated_data):
+        return ClassificationLabel.objects.create(**validated_data)

@@ -14,10 +14,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.http import HttpResponse
 from django.urls import path, include
+from api_number.urls import urlpatterns as apiurls
+from djgentelella.urls import urlpatterns as djgentelellaurls
 
+def home(request):
+    return HttpResponse('OK')
 
-urlpatterns = [
+urlpatterns = djgentelellaurls + [
     path('admin/', admin.site.urls),
-    path('', include('api_number.urls'))
-]
+    path('home', home, name="home"),
+] + apiurls

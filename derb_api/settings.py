@@ -46,6 +46,7 @@ INSTALLED_APPS = [
 
 MARKITUP_FILTER = ('markdown.markdown', {'safe_mode': True})
 MARKITUP_SET = 'markitup/sets/markdown/'
+JQUERY_URL = None
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
