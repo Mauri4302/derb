@@ -13,9 +13,7 @@
 
 
    <div class="row">
- <form id="myForm">
-  <div class='col-sm-12 col-md-12 col-lg-12'>
-    <div class="card">
+    <div class="card mb-3">
       <div class="card-body">
         <div class="card-title titles">
           <h2> Numerical questions </h2>
@@ -35,10 +33,15 @@
                   <div class="card-title titles">
             <h2> Contenedor </h2>
         </div>
-                  <div class="col-lg-12 col-md-12 col-sm-12"  id="content">
+                  <form action="" method="POST" class="form-components" id="form_content">
+                    {% csrf_token %}
+                       <div class="form-components">
+                    <!-- Componentes del formulario se agregarán aquí -->
 
-        <!-- Contenido de la columna de Contenedor -->
-    </div>
+                    </div>
+                      <button type="submit" class="btn btn-primary save-button">Guardar</button>
+                  </form>
+
               </div>
 
 
@@ -54,10 +57,6 @@
 
       </div>
 
-    </div>
-
-
-  </form>
   </div>
 
 

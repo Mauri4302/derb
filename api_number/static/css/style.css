@@ -1,13 +1,3 @@
-/*.draggable-button {
-    width: 130px;
-    height: 50px;
-    /*border: 1px solid #000; *//* Puedes personalizar el borde según tus necesidades */
-   /* display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-}*/
-
 
 .button-icon {
     width: 80px; /* Ajusta el tamaño del ícono según tus necesidades */
@@ -19,10 +9,16 @@
     margin-top: 5px;
 }
 
-#component, #contentParent, #caract, #content {
+#component, #caract {
     overflow-y: auto; /* Habilita el scroll vertical */
-    max-height: 800px !important;
+    max-height: 300px !important;
     min-height: 300px;
+}
+
+#form_content{
+    overflow-y: auto;
+    max-height: 240px !important;
+    min-height: 240px !important;
 }
 
 .activonumber{
@@ -43,4 +39,44 @@
 
 .hidden-content{
     display: none;
+}
+
+.template {
+    margin-bottom: 10px !important; /* Ajusta el valor según el espacio que desees entre los templates */
+}
+
+
+/* Estilos para los botones de editar y eliminar */
+.button-container {
+    display: flex;
+    gap: 8px; /* Espacio entre los botones */
+}
+
+.edit-button, .delete-button {
+    width: 30px; /* Ancho de los botones */
+    height: 30px; /* Altura de los botones */
+    padding: 0; /* Elimina el relleno interno de los botones */
+    font-size: 14px; /* Tamaño del texto del botón */
+}
+
+/* Estilos para los iconos dentro de los botones */
+.edit-button i, .delete-button i {
+    font-size: 18px; /* Tamaño del icono */
+    margin-right: 4px; /* Espacio a la derecha del icono */
+}
+
+.card.template {
+    position: relative;
+}
+
+.button-container {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.card.template:hover .button-container {
+    opacity: 1;
 }

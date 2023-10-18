@@ -15,6 +15,9 @@
         'api_url': api_url,
         'form_data': {}, //Aqui va la informacion del formulario
         'init': function(){
+
+            //this.repositionSaveButton();
+            //this.delete_component();
             fetch(this.api_url,
             {
             headers: {'X-CSRFToken': getCookie('csrftoken'), 'Content-Type': 'application/json'}
@@ -43,24 +46,40 @@
         //console.log('Hola-- ',this.form_data['data']);
         this.process_children(this.form_data['data'], context);
 
-        $("#content").droppable({
+        $("#form_content").droppable({
                 accept: $('.builder-component'),
                 activeClass: "active",
                 hoverClass: "hover",
                 drop: function (event, ui) {
                 let idrandom = (Math.random() + 1).toString(36).substring(7);
-                console.log(ui)
-                    var droppedItem = ui.helper.clone();
-                    droppedItem.attr('id', 'textbox-'+idrandom);
+                //console.log(ui)
+                let droppedItem = ui.helper.clone();
+                droppedItem.attr('id', 'textbox-'+idrandom);
 
-                    $(this).append(droppedItem);
-                    console.log("HTML:::: ", $(this).append(droppedItem))
-                    var dataForms = droppedItem.data('forms'); // Accede al atributo data-forms del elemento clonado
-        console.log("Elemento arrastrado...", droppedItem);
-        console.log("Data Forms:", dataForms);
+                let data = droppedItem.data('forms'); // Accede al atributo data-forms del elemento clonado
+
+                let template = fmanager.form_content(data); // Usar this.form_content
+
+                $(this).find('.form-components').append(template);
+                fmanager.repositionSaveButton();
+                fmanager.delete_component();
                 }
             });
 
+        },
+        'repositionSaveButton':function(){
+            let formContent = $('#form_content');
+            let formComponents = formContent.find('.form-components');
+            let saveButton = formContent.find('.save-button');
+
+            formComponents.append(saveButton);
+        },
+        'delete_component': function(){
+        $(document).on('click', '.delete-btn', function() {
+        let component = $(this).closest('.template');
+        let componentId = component.data('id');
+        component.remove();
+        });
         },
         'process_children': function(children, context){
             let keys = null;
@@ -79,16 +98,16 @@
                 if(indexclass != -1){
                 //this.list = children[i];
                   type = children[i].type;
-                  console.log("DENTRO:---- ",type)
+                  //console.log("DENTRO:---- ",type)
             switch(type) {
 
                 case 'textfield':
-                console.log('TEXT:::: ', children[i])
+                //console.log('TEXT:::: ', children[i])
                     this.render_textfield(parent, children[i]);
                     this.list.push(children[i]);
                     break;
                 case 'number':
-                    console.log('NUMBER:::: ', children[i])
+                    //console.log('NUMBER:::: ', children[i])
                     this.render_number(parent, children[i]);
                     this.list.push(children[i]);
                     break;
@@ -111,10 +130,8 @@
 </div>
     `;
 
-
      let result = Sqrl.render(template, {title:data.type});
     let bodydiv = $("#"+parent);
-    //$(result).append("#"+parent)
     bodydiv.append(result);
 
 //DRAG AND DROP
@@ -155,6 +172,29 @@
             });
 
         },
+        'form_content': function(data){
+    let template = `
+    <div class="card template" data-id="${data.id}">
+    <div class="card-body">
+        <label for="inputPassword5" class="form-label">${data.label}</label>
+        <input type="${data.inputType}" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
+        <div id="passwordHelpBlock" class="form-text">
+            ${data.description}
+        </div>
+        <div class="button-container">
+            <button class="btn btn-sm btn-primary edit-btn">
+                <i class="fa fa-pencil-square" aria-hidden="true"></i>
+            </button>
+            <button class="btn btn-sm btn-danger delete-btn">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+            </button>
+        </div>
+    </div>
+</div>
+    `;
+
+    return template;
+}
     }
 
     fmanager.init();
