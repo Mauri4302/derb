@@ -1,47 +1,4 @@
-/*const form = document.getElementById('myForm');
 
-    // Escuchar el evento submit del formulario
-    form.addEventListener('submit', function(event) {
-      event.preventDefault();
-
-
-      const labelAlignment = document.getElementById('labelAlignment').value;
-      const label = document.getElementById('label').value;
-      const placeholder = document.getElementById('placeholder').value;
-      const required = document.getElementById('required').checked;
-      const minLength = document.getElementById('minLength').value;
-      const maxLength = document.getElementById('maxLength').value;
-      const step = document.getElementById('step').value;
-
-      const inputAttributes = {
-        labelAlignment,
-        label,
-        placeholder,
-        required,
-        minLength,
-        maxLength,
-        step
-      };
-
-      console.log(inputAttributes);
-    }); */
-
-    /*console.log("hola")
-    const text_box = document.querySelector('#textBox')
-    const contenedor = document.querySelector('#contenedor')
-
-    text_box.addEventListener('dragstart', e =>{
-    console.log('Drag Start...')
-    })
-
-    text_box.addEventListener('dragend', e =>{
-    console.log('Drag End...')
-    })
-
-     text_box.addEventListener('drag', e =>{
-    console.log('Drag...')
-    })*/
-    //console.log(document.form_url.form_api)
   var FormStructure = {
   'category': CategoryClass,
   'number': NumberClass,
@@ -52,6 +9,8 @@
 
   function  FormManager(container_id, api_url){
     var fmanager = {
+        'qid': null,
+        'list': null,
         'id': container_id,
         'api_url': api_url,
         'form_data': {}, //Aqui va la informacion del formulario
@@ -62,6 +21,7 @@
             }
             ).then((response)=>{return response.json()}
                   ).then(this.base_request_success(this)).catch((error)=>{console.log(error)})
+
         },
         'base_request_success': function(instance){
             return function(data){
@@ -82,32 +42,119 @@
         //console.log("ID: ",context['parent'])
         //console.log('Hola-- ',this.form_data['data']);
         this.process_children(this.form_data['data'], context);
+
+        $("#content").droppable({
+                accept: $('.builder-component'),
+                activeClass: "active",
+                hoverClass: "hover",
+                drop: function (event, ui) {
+                let idrandom = (Math.random() + 1).toString(36).substring(7);
+                console.log(ui)
+                    var droppedItem = ui.helper.clone();
+                    droppedItem.attr('id', 'textbox-'+idrandom);
+
+                    $(this).append(droppedItem);
+                    console.log("HTML:::: ", $(this).append(droppedItem))
+                    var dataForms = droppedItem.data('forms'); // Accede al atributo data-forms del elemento clonado
+        console.log("Elemento arrastrado...", droppedItem);
+        console.log("Data Forms:", dataForms);
+                }
+            });
+
         },
         'process_children': function(children, context){
             let keys = null;
+            this.list = [];
             let indexclass = -1;
             let classM = null;
+            let type = null;
             let parent = context['parent'];
-            let d = 0
-            //console.log("children---- ",children," --- ",context);
+            //console.log("ANTES---- ", children)
             for(let i=0; i < children.length; i++){
-                console.log("KEYS: ",d, Object.keys(children[i]))
+                //console.log("HIJOS---- ", children[i].type)
+                //console.log("KEYS: ", Object.keys(children[i]))
                 keys = Object.keys(children[i]);
-                indexclass = keys.indexOf('class');
-                //console.log("CLASS: ", indexclass)
+                indexclass = keys.indexOf('type');
+                //console.log("TYPE: ", indexclass)
                 if(indexclass != -1){
-                  classM = FormStructure[children[i].class]
-                  parent = classM.render_data(parent, children[i]);
-                  context['parent'] = parent;
-                }
-                indexclass = keys.indexOf('children');
-                //console.log("CHILDREN: ", indexclass)
-                if(indexclass !== -1){
-                    this.process_children(children[i].children, context);
-                }
-                d++;
+                //this.list = children[i];
+                  type = children[i].type;
+                  console.log("DENTRO:---- ",type)
+            switch(type) {
+
+                case 'textfield':
+                console.log('TEXT:::: ', children[i])
+                    this.render_textfield(parent, children[i]);
+                    this.list.push(children[i]);
+                    break;
+                case 'number':
+                    console.log('NUMBER:::: ', children[i])
+                    this.render_number(parent, children[i]);
+                    this.list.push(children[i]);
+                    break;
+
+                default:
+
+                    break;
             }
+
+               }
         }
+    },
+    'render_textfield': function(parent, data){
+    //console.log("render_textfield::: ", data, "Parent::: ", parent)
+    data.id = 1;
+    let template=`
+     <div class="builder-component hidden-content" id="children" data-forms='${JSON.stringify(data)}' tabindex="-1">
+ <div class="field-type">${data.type}</div>
+
+</div>
+    `;
+
+
+     let result = Sqrl.render(template, {title:data.type});
+    let bodydiv = $("#"+parent);
+    //$(result).append("#"+parent)
+    bodydiv.append(result);
+
+//DRAG AND DROP
+    let element = bodydiv.find("#children");
+           this.makeElementDraggable(element);
+    },
+    'render_number': function(parent, data){
+    data.id = 2;
+    console.log('RENDER_NUMBER::: ', data, "PARENT:: ", parent)
+    //this.qid = (Math.random() + 1).toString(36).substring(7);
+
+    let template=`
+     <div class="builder-component hidden-content" id="children" data-forms='${JSON.stringify(data)}' tabindex="-1">
+    <div class="field-type">${data.type}</div>
+</div>
+    `;
+
+     let result = Sqrl.render(template, {title:data.type});
+    let bodydiv = $("#"+parent);
+    //$(result).append("#"+parent)
+    bodydiv.append(result);
+       let element = bodydiv.find("#children");
+           this.makeElementDraggable(element);
+
+    },
+    'makeElementDraggable': function(element) {
+            this.qid = (Math.random() + 1).toString(36).substring(7);
+            element.attr('id', 'textBox-' + this.qid);
+            element.addClass('textbox card btn btn-info d-flex align-items-center justify-content-center');
+            element.attr('draggable', true);
+
+            element.draggable({
+                revert: "invalid",
+                helper: "clone",
+                appendTo: "body",
+                axis: false,
+                cursor: "move"
+            });
+
+        },
     }
 
     fmanager.init();
@@ -120,5 +167,33 @@
     return fmanager;
  }
 
- process_form('textBox');
+ process_form('component');
 
+
+/*
+'process_children': function(children, context){
+            let keys = null;
+            let indexclass = -1;
+            let classM = null;
+            let parent = context['parent'];
+
+            //console.log("children---- ",children," --- ",context);
+            for(let i=0; i < children.length; i++){
+                console.log("KEYS: ",d, Object.keys(children[i]))
+                keys = Object.keys(children[i]);
+                indexclass = keys.indexOf('class');
+                //console.log("CLASS: ", indexclass)
+                if(indexclass != -1){
+                  classM = FormStructure[children[i].class]
+                  parent = classM.render_data(parent, children[i]);
+                  context['parent'] = parent;
+                }
+                indexclass = keys.indexOf('children');
+                console.log("CHILDREN: ", indexclass)
+                if(indexclass !== -1){
+                    this.process_children(children[i].children, context);
+                }
+
+            }
+        }
+*/

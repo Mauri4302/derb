@@ -25,10 +25,22 @@
     min-height: 300px;
 }
 
-.activo{
+.activonumber{
  background-color: red;
 }
 
-.deposito{
+.depositonumber{
     background-color: blue;
+}
+
+.activotext{
+ background-color: red;
+}
+
+.depositotext{
+    background-color: blue;
+}
+
+.hidden-content{
+    display: none;
 }

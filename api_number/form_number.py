@@ -1,4 +1,4 @@
-form = {
+"""form = {
     'config': {
         'id': 1
     },
@@ -35,4 +35,49 @@ form = {
                        ]
         }
     ]
+} """
+
+form = {
+    'setting': {
+        'name': 'form'
+    },
+    'data':[
+{
+            'id': '',
+            "type": "textfield",
+            'inputType': 'text',
+            'label': 'textfield',
+            "labelPosition": "left-left",
+            "placeholder": "",
+            "description":'',
+                "validate": {
+                "required": False,
+                "minLength": 2,
+                "maxLength": 45,
+                },
+                "conditional": {
+                "quetion_related": '',
+                "evaluate": "prueba"
+            },
+        },
+{
+            'id': '',
+            "type": "number",
+            'inputType': 'number',
+            'label': 'Number',
+            "labelPosition": "left-left",
+            "placeholder": "",
+            "description":'',
+                "validate": {
+                "required": False,
+                "minLength": 2,
+                "maxLength": 45,
+            },
+                "conditional": {
+                "quetion_related": '',
+                "evaluate": "prueba"
+            },
+        }
+    ]
 }
+

@@ -33,7 +33,7 @@ var CategoryClass = {
       //console.log('Content--- ', ui.draggable.detach())
       //$(this).append(ui.draggable);
         var droppedItem = ui.helper.clone(); // Clona el elemento arrastrado
-        console.log("CLON--- ",droppedItem)
+        console.log("CLON--- ",droppedItem.id)
         $(this).append(droppedItem); // Agrega el clon al contenedor
         //console.log("this--- ",$(this).append(droppedItem))
        var textboxHTML = '<div id="'+droppedItem.id+'" class="form-group border mb-2 mt-2 ms-2 ml-2">';
@@ -50,7 +50,7 @@ textboxHTML += '</div>';
   textboxHTML += '</div>';*/
 
   // Agrega la caja de texto al contenedor
-  //$(this).append(textboxHTML);
+  $(this).append(textboxHTML);
         // Aquí puedes acceder a la data (características y validaciones) del textbox y aplicarlas al clon
         var textboxData = {
           'class': 'number',
@@ -77,7 +77,7 @@ textboxHTML += '</div>';
         // ... Código para aplicar características y validaciones al clon del textbox ...
 
         // Ejemplo: Establece el placeholder del textbox clonado
-        droppedItem.attr('placeholder', textboxData.placeholder);
+        //droppedItem.attr('placeholder', textboxData.placeholder);
 
         // ... Resto del código para aplicar características y validaciones ...
 
@@ -101,7 +101,9 @@ textboxHTML += '</div>';
 }
 
 var NumberClass = {
-    'render_data': function(parent, data){}
+    'render_data': function(parent, data){
+    console.log("NUmber parent--- ",parent)
+    }
 }
 
 var BooleanClass = {
