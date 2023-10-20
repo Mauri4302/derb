@@ -47,8 +47,8 @@ form = {
             "type": "textfield",
             'inputType': 'text',
             'label': 'textfield',
-            "labelPosition": "left-left",
-            "placeholder": "",
+            "labelPosition": "text-left",
+            "placeholder": "PLace Holder...",
             "description":'',
                 "validate": {
                 "required": False,
@@ -65,8 +65,8 @@ form = {
             "type": "number",
             'inputType': 'number',
             'label': 'Number',
-            "labelPosition": "left-left",
-            "placeholder": "",
+            "labelPosition": "text-center",
+            "placeholder": "question number",
             "description":'',
                 "validate": {
                 "required": False,

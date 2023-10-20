@@ -57,12 +57,19 @@
                 droppedItem.attr('id', 'textbox-'+idrandom);
 
                 let data = droppedItem.data('forms'); // Accede al atributo data-forms del elemento clonado
-
+                console.log("DATA DATA::: ",data)
                 let template = fmanager.form_content(data); // Usar this.form_content
-
+                    console.log("TEMPLATE:::: ", template);
                 $(this).find('.form-components').append(template);
                 fmanager.repositionSaveButton();
+
                 fmanager.delete_component();
+                $(document).on('click', '.edit-btn', function() {
+                        let dataID = $(this).closest('.template').data('id');
+                        console.log("DATAID::::: ", dataID);
+                        fmanager.edit_component(dataID);
+
+                    });
                 }
             });
 
@@ -76,10 +83,27 @@
         },
         'delete_component': function(){
         $(document).on('click', '.delete-btn', function() {
+
         let component = $(this).closest('.template');
         let componentId = component.data('id');
+        fmanager.delete_element_list(componentId);
+
         component.remove();
+
         });
+        },
+        'delete_element_list': function(id){
+            this.list = this.list.filter(item => item.id !== id);
+            console.log("LIST LIST:::: ",this.list)
+        },
+        'edit_component': function(dataID){
+        $('#staticBackdrop').modal('show');
+        let component = $(`[data-id="${dataID}"]`);
+        console.log("BOTON CON EL ID::: ", component);
+        let labelElement = component.find('label');
+        let inputElement = component.find('input');
+        let descriptionElement = component.find('.form-text');
+
         },
         'process_children': function(children, context){
             let keys = null;
@@ -88,28 +112,20 @@
             let classM = null;
             let type = null;
             let parent = context['parent'];
-            //console.log("ANTES---- ", children)
             for(let i=0; i < children.length; i++){
-                //console.log("HIJOS---- ", children[i].type)
-                //console.log("KEYS: ", Object.keys(children[i]))
                 keys = Object.keys(children[i]);
                 indexclass = keys.indexOf('type');
-                //console.log("TYPE: ", indexclass)
                 if(indexclass != -1){
-                //this.list = children[i];
                   type = children[i].type;
-                  //console.log("DENTRO:---- ",type)
             switch(type) {
 
                 case 'textfield':
-                //console.log('TEXT:::: ', children[i])
                     this.render_textfield(parent, children[i]);
-                    this.list.push(children[i]);
+                    //this.list.push(children[i]);
                     break;
                 case 'number':
-                    //console.log('NUMBER:::: ', children[i])
                     this.render_number(parent, children[i]);
-                    this.list.push(children[i]);
+                    //this.list.push(children[i]);
                     break;
 
                 default:
@@ -173,19 +189,25 @@
 
         },
         'form_content': function(data){
+
+        console.log("FORM_CONTENT:::: ", data)
+        let dataID = (Math.random() + 1).toString(36).substring(7);
+        data.id = dataID;
+        this.list.push(data);
+        console.log("LIST__:::: ", this.list);
     let template = `
-    <div class="card template" data-id="${data.id}">
-    <div class="card-body">
-        <label for="inputPassword5" class="form-label">${data.label}</label>
-        <input type="${data.inputType}" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
-        <div id="passwordHelpBlock" class="form-text">
+    <div class="card template" data-id="${dataID}" id="${data.id}">
+    <div class="card-body  ${data.labelPosition}">
+        <label for="input" class="form-label">${data.label}</label>
+        <input type="${data.inputType}" id="input" class="form-control" aria-describedby="input" placeholder="${data.placeholder}" ${data.required ? 'required' : ''}>
+        <div id="desciption" class="form-text">
             ${data.description}
         </div>
         <div class="button-container">
-            <button class="btn btn-sm btn-primary edit-btn">
+            <button type="button" class="btn btn-sm btn-primary edit-btn"  data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                 <i class="fa fa-pencil-square" aria-hidden="true"></i>
             </button>
-            <button class="btn btn-sm btn-danger delete-btn">
+            <button type="button" class="btn btn-sm btn-danger delete-btn">
                 <i class="fa fa-trash" aria-hidden="true"></i>
             </button>
         </div>
