@@ -56,186 +56,91 @@
 
     </div>
 
-
-    <div class="col component-edit-tabs col-sm-6">
-    <div ref="editForm">
-        <div ref="component" class="formio-component formio-component-form  formio-component-label-hidden" id="edmbjnc">
-<div novalidate="" ref="webform" class="formio-form">
-  <div ref="component" class="formio-component formio-component-tabs formio-component-tabs" id="etwzune">
-
-  <div class="card">
-  <div class="card-header">
-    <ul role="tablist" class="tab-component-tabs nav nav-tabs card-header-tabs">
-
-      <li ref="tabLi-tabs" role="tab" class="nav-item active">
-        <a ref="tabLink-tabs" href="#display" class="nav-link active">
-          Display
-        </a>
-      </li>
-
-      <li ref="tabLi-tabs" role="tab" class="nav-item">
-        <a ref="tabLink-tabs" href="#validation" class="nav-link">
-          Validation
-        </a>
-      </li>
-
-      <li ref="tabLi-tabs" role="tab" class="nav-item">
-        <a ref="tabLink-tabs" href="#conditional" class="nav-link">
-          Conditional
-        </a>
-      </li>
+    <!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <!-- <div class="modal-header"> -->
+    <div class="modal-header">
+         <ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Display</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Validation</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Conditional</button>
+  </li>
+</ul>
 
 
-    </ul>
-  </div>
-
-  <div ref="tab-tabs" style="display: block;" class="card-body tab-pane active" role="tabpanel">
-    <div ref="component" class="mb-2 formio-form-group has-feedback formio-component formio-component-textfield formio-component-label  required" id="edxpyz">
-  <label id="l-edxpyz-label" for="edxpyz-label" class="col-form-label  field-required" ref="label">
-  Label
-    <i data-tooltip="The label for this field that will appear next to it." class="fa fa-question-sign bi bi-question-circle text-muted" tabindex="0" ref="tooltip" aria-expanded="false"></i>
-
-</label>
-<div ref="element">
-    <input aria-required="true" aria-labelledby="l-edxpyz-label" id="edxpyz-label" value="" spellcheck="false" placeholder="Field Label" lang="en" class="form-control" type="text" name="data[label]" ref="input" data-ms-editor="true" aria-invalid="false" data-listener-added_412781b1="true">
+    <!--  </div> -->
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
 
-</div>
-<div ref="component" class="mb-2 formio-form-group has-feedback formio-component formio-component-select formio-component-labelPosition" id="erze0jj">
-  <label id="l-erze0jj-labelPosition" for="erze0jj-labelPosition" class="col-form-label" ref="label">
-  Label Position
-    <i data-tooltip="Position for the label for this field." class="fa fa-question-sign bi bi-question-circle text-muted" tabindex="0" ref="tooltip" aria-expanded="false"></i>
+      <div class="modal-body">
+          <!-- ACA VA EL TAB PARA PODER GUARDAR -->
 
-</label>
-<div class="choices form-group formio-choices" data-type="select-one" dir="ltr" tabindex="-1" role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-expanded="false">
-  <div class="form-control ui fluid selection dropdown" tabindex="0" aria-invalid="false">
-    <select aria-required="false" id="erze0jj-labelPosition" lang="en" class="form-control choices__input" type="text" name="data[labelPosition]" ref="selectContainer" dir="ltr" hidden="" tabindex="-1" data-choice="active">
-      <option value="top" data-custom-properties="[object Object]">&lt;span&gt;Top&lt;/span&gt;</option>
-    </select>
-    <div class="choices__list choices__list--single">
-      <div class="choices__item choices__item--selectable" data-item="" data-id="4" data-value="top" data-custom-properties="[object Object]" aria-selected="true" data-deletable="">
-        <span>Top</span>
-        <button type="button" class="choices__button" aria-label="Remove item: 'top'" data-button="">Remove item</button>
-      </div>
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+      <!-- ACA VA EL: LABELNAME, LABELPOSITION, PLACEHOLDER Y EL DESCRIPTION -->
+    <div class="form-group">
+        <label for="labelname">Label</label>
+        <input type="text" class="form-control" value="">
     </div>
-  </div>
-  <div class="choices__list choices__list--dropdown" aria-expanded="false">
-    <input type="text" name="search_terms" class="choices__input choices__input--cloned" autocomplete="off" autocapitalize="off" spellcheck="false" role="textbox" aria-autocomplete="list" aria-label="false" placeholder="Type to search">
-    <div class="choices__list" role="listbox">
-      <div id="choices--erze0jj-labelPosition-item-choice-1" class="choices__item choices__item--choice is-selected choices__item--selectable is-highlighted" role="option" data-choice="" data-id="1" data-value="top" data-select-text="" data-choice-selectable="" aria-selected="true">
-        <span>Top</span>
-      </div>
-      <div id="choices--erze0jj-labelPosition-item-choice-2" class="choices__item choices__item--choice choices__item--selectable" role="option" data-choice="" data-id="2" data-value="left-left" data-select-text="" data-choice-selectable="">
-        <span>Left (Left-aligned)</span>
-      </div><div id="choices--erze0jj-labelPosition-item-choice-3" class="choices__item choices__item--choice choices__item--selectable" role="option" data-choice="" data-id="3" data-value="left-right" data-select-text="" data-choice-selectable="">
-      <span>Left (Right-aligned)</span>
+
+      <div class="form-group">
+        <label for="labelPosition">LabelPsition</label>
+        <select id="labelposition" class="form-select">
+            <option value="text-left">left</option>
+            <option value="text-center">center</option>
+            <option value="text-right">right</option>
+        </select>
     </div>
-      <div id="choices--erze0jj-labelPosition-item-choice-4" class="choices__item choices__item--choice choices__item--selectable" role="option" data-choice="" data-id="4" data-value="right-left" data-select-text="" data-choice-selectable="">
-        <span>Right (Left-aligned)</span>
-      </div>
-      <div id="choices--erze0jj-labelPosition-item-choice-5" class="choices__item choices__item--choice choices__item--selectable" role="option" data-choice="" data-id="5" data-value="right-right" data-select-text="" data-choice-selectable="">
-        <span>Right (Right-aligned)</span>
-      </div>
-      <div id="choices--erze0jj-labelPosition-item-choice-6" class="choices__item choices__item--choice choices__item--selectable" role="option" data-choice="" data-id="6" data-value="bottom" data-select-text="" data-choice-selectable="">
-        <span>Bottom</span>
-      </div>
+
+      <div class="form-group">
+        <label for="placeholder">Placeholder</label>
+        <input type="text" class="form-control" value="">
     </div>
+      <!-- END -->
   </div>
-</div>
-<input aria-label="autocomplete" tabindex="-1" ref="autocompleteInput" class="formio-select-autocomplete-input" type="text" spellcheck="false" data-ms-editor="true">
-  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 
-</div>
-<div ref="component" class="mb-2 formio-form-group has-feedback formio-component formio-component-textfield formio-component-placeholder" id="ee2l5l8">
-  <label id="l-ee2l5l8-placeholder" for="ee2l5l8-placeholder" class="col-form-label" ref="label">
-  Placeholder
-    <i data-tooltip="The placeholder text that will appear when this field is empty." class="fa fa-question-sign bi bi-question-circle text-muted" tabindex="0" ref="tooltip" aria-expanded="false"></i>
-</label>
-<div ref="element">
-    <input aria-required="false" aria-labelledby="l-ee2l5l8-placeholder" id="ee2l5l8-placeholder" value="" spellcheck="false" placeholder="Placeholder" lang="en" class="form-control" type="text" name="data[placeholder]" ref="input" data-ms-editor="true" aria-invalid="false">
-        </div>
-  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
-</div>
-<div ref="component" class="mb-2 formio-form-group has-feedback formio-component formio-component-textarea formio-component-description" id="euutnq">
-  <label id="l-euutnq-description" for="euutnq-description" class="col-form-label" ref="label">
-  Description
-    <i data-tooltip="The description is text that will appear below the input field." class="fa fa-question-sign bi bi-question-circle text-muted" tabindex="0" ref="tooltip" aria-expanded="false"></i>
-
-</label>
-
-<div ref="element">
-
-  <div ref="input" class=" ace_editor ace_hidpi ace-xcode" style="height: 36px;" aria-invalid="false"><textarea class="ace_text-input" wrap="off" autocorrect="off" autocapitalize="off" spellcheck="false" style="opacity: 0; font-size: 1px; height: 1px; width: 1px; transform: translate(127px, 12px);"></textarea><div class="ace_gutter" aria-hidden="true" style="left: 0px; width: 39px;"><div class="ace_layer ace_gutter-layer ace_folding-enabled" style="height: 1e+06px; transform: translate(0px, 0px); width: 39px;"><div class="ace_gutter-cell ace_gutter-active-line " style="height: 12px; top: 0px;">1<span style="display: none;"></span></div></div></div><div class="ace_scroller" style="line-height: 12px; left: 39px; right: 0px; bottom: 0px;"><div class="ace_content" style="transform: translate(0px, 0px); width: 427px; height: 60px;"><div class="ace_layer ace_print-margin-layer"><div class="ace_print-margin" style="left: 484px; visibility: visible;"></div></div><div class="ace_layer ace_marker-layer"><div class="ace_active-line" style="height: 12px; top: 0px; left: 0px; right: 0px;"></div><div class="ace_selected-word" style="height: 12px; width: 84px; top: 0px; left: 4px;"></div><div class="ace_selection ace_start ace_br15" style="height: 12px; width: 84px; top: 0px; left: 4px;"></div></div><div class="ace_layer ace_text-layer" style="height: 1e+06px; margin: 0px 4px; transform: translate(0px, 0px);"><div class="ace_line" style="height: 12px; top: 0px;"><span class="ace_text ace_xml">Hola bebe bebe</span></div></div><div class="ace_layer ace_marker-layer"></div><div class="ace_layer ace_cursor-layer ace_hidden-cursors"><div class="ace_cursor" style="display: block; transform: translate(88px, 0px); width: 6px; height: 12px;"></div></div></div></div><div class="ace_scrollbar ace_scrollbar-v" style="display: none; width: 20px; bottom: 0px;"><div class="ace_scrollbar-inner" style="width: 20px; height: 12px;">&nbsp;</div></div><div class="ace_scrollbar ace_scrollbar-h" style="display: none; height: 20px; left: 39px; right: 0px;"><div class="ace_scrollbar-inner" style="height: 20px; width: 427px;">&nbsp;</div></div><div style="height: auto; width: auto; top: 0px; left: 0px; visibility: hidden; position: absolute; white-space: pre; font: inherit; overflow: hidden;"><div style="height: auto; width: auto; top: 0px; left: 0px; visibility: hidden; position: absolute; white-space: pre; font: inherit; overflow: visible;">הההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההההה</div><div style="height: auto; width: auto; top: 0px; left: 0px; visibility: hidden; position: absolute; white-space: pre; font-style: inherit; font-variant: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: inherit; font-optical-sizing: inherit; font-kerning: inherit; font-feature-settings: inherit; font-variation-settings: inherit; overflow: visible;">XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</div></div></div>
-
-        </div>
-  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
-
-</div>
-  </div>
-
-  <div ref="tab-tabs" style="display: none" class="card-body tab-pane" role="tabpanel">
-
-  </div>
-  <div ref="tab-tabs" style="display: none;" class="card-body tab-pane" role="tabpanel">
-<div ref="component" class="mb-2 formio-form-group has-feedback formio-component formio-component-checkbox formio-component-validate.required" id="ebnxuh5">
-<div class="form-check checkbox">
-  <input aria-required="false" value="1" lang="en" class="form-check-input" type="checkbox" name="data[validate.required]" ref="input" aria-invalid="false" checked="true">
-    <label class="form-check-label"><span>Required</span></label>
-    <i data-tooltip="A required field must be filled in before the form can be submitted." class="fa fa-question-sign bi bi-question-circle text-muted" tabindex="0" ref="tooltip" aria-expanded="false"></i>
-</div>
-  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
-</div>
-<div ref="component" class="mb-2 formio-form-group has-feedback formio-component formio-component-number formio-component-validate.minLength" id="eqrjbu7">
-  <label id="l-eqrjbu7-validate.minLength" for="eqrjbu7-validate.minLength" class="col-form-label" ref="label">
-  Minimum Length
-    <span class="visually-hidden">, numeric only,</span>
-    <i data-tooltip="The minimum length requirement this field must meet." class="fa fa-question-sign bi bi-question-circle text-muted" tabindex="0" ref="tooltip" aria-expanded="false"></i>
-</label>
-<div ref="element">
-    <input aria-required="false" aria-labelledby="l-eqrjbu7-validate.minLength" id="eqrjbu7-validate.minLength" value="" inputmode="decimal" placeholder="Minimum Length" lang="en" class="form-control" type="text" name="data[validate.minLength]" ref="input" pattern="[0-9.]*" spellcheck="false" data-ms-editor="true" aria-invalid="false">
-        </div>
-  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
-</div>
-<div ref="component" class="mb-2 formio-form-group has-feedback formio-component formio-component-number formio-component-validate.maxLength" id="ez1qqly">
-  <label id="l-ez1qqly-validate.maxLength" for="ez1qqly-validate.maxLength" class="col-form-label" ref="label">
-  Maximum Length
-    <span class="visually-hidden">, numeric only,</span>
-    <i data-tooltip="The maximum length requirement this field must meet." class="fa fa-question-sign bi bi-question-circle text-muted" tabindex="0" ref="tooltip" aria-expanded="false"></i>
-</label>
-<div ref="element">
-    <input aria-required="false" aria-labelledby="l-ez1qqly-validate.maxLength" id="ez1qqly-validate.maxLength" value="" inputmode="decimal" placeholder="Maximum Length" lang="en" class="form-control" type="text" name="data[validate.maxLength]" ref="input" pattern="[0-9.]*" spellcheck="false" data-ms-editor="true" aria-invalid="false">
-        </div>
-  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
-</div>
-<div ref="component" class="mb-2 formio-form-group has-feedback formio-component formio-component-textfield formio-component-errorLabel" id="emi2kpj">
-  <label id="l-emi2kpj-errorLabel" for="emi2kpj-errorLabel" class="col-form-label" ref="label">
-  Error Label
-    <i data-tooltip="The label for this field when an error occurs." class="fa fa-question-sign bi bi-question-circle text-muted" tabindex="0" ref="tooltip" aria-expanded="false"></i>
-</label>
-<div ref="element">
-    <input aria-required="false" aria-labelledby="l-emi2kpj-errorLabel" id="emi2kpj-errorLabel" value="" spellcheck="false" placeholder="Error Label" lang="en" class="form-control" type="text" name="data[errorLabel]" ref="input" data-ms-editor="true" aria-invalid="false">
-        </div>
-  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
-</div>
-  </div>
-
+    <div class="form-check">
+  <input class="form-check-input" type="checkbox" value="" id="required">
+  <label class="form-check-label" for="required">
+    Required
+  </label>
 </div>
 
-  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
+      <div class="form-group">
+        <label for="maximumlength">Maximum Length</label>
+        <input type="number" class="form-control" value="">
+    </div>
 
-</div>
+      <div class="form-group">
+        <label for="minimumlength">Minimum Length</label>
+        <input type="number" class="form-control" value="">
+    </div>
 
-
-</div>
-  <div class="formio-errors invalid-feedback" ref="messageContainer"></div>
-
-</div>
-
+      <div class="form-group">
+        <label for="messageerror">Label Error</label>
+        <input type="text" class="form-control" value="">
     </div>
 
   </div>
+  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">Conditional</div>
+</div>
 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" id="guardarCambiosBtn">Guardar Cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
 
   </div>
 

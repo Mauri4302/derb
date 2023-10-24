@@ -47,7 +47,7 @@ form = {
             "type": "textfield",
             'inputType': 'text',
             'label': 'textfield',
-            "labelPosition": "text-left",
+            "labelPosition": "text-center",
             "placeholder": "PLace Holder...",
             "description":'',
                 "validate": {
@@ -56,7 +56,7 @@ form = {
                 "maxLength": 45,
                 },
                 "conditional": {
-                "quetion_related": '',
+                "quetion_related": [''],
                 "evaluate": "prueba"
             },
         },

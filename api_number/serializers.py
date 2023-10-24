@@ -1,22 +1,41 @@
+import random
+import string
+
 from rest_framework import serializers
 from .models import InputSetting, InputField
-
-class InputValidationSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = InputSetting
-        fields = ['id', 'required', 'minlength', 'maxlength', 'step']
+from .form_number import form
 
 
-class ClassificationLabel:
-    objects = None
 
+class ValidationSerializer(serializers.Serializer):
+    required = serializers.BooleanField()
+    minLength = serializers.IntegerField()
+    maxLength = serializers.IntegerField()
 
-class InputFieldSerializer(serializers.ModelSerializer):
-    validations = InputValidationSerializer()
+class ConditionalSerializer(serializers.Serializer):
+    quetion_related = serializers.IntegerField()
+    evaluate = serializers.CharField()
 
-    class Meta:
-        model = InputField
-        fields = ['id', 'label_alignment', 'label', 'placeholder', 'validations']
+class InputSerializer(serializers.Serializer):
+    id = 0
+    type = serializers.Field()
+    inputType = serializers.Field()
+    label = serializers.Field()
+    labelPosition = serializers.Field()
+    placeholder = serializers.Field()
+    description = serializers.Field()
+    validations = ValidationSerializer()
+    conditional = ConditionalSerializer()
+
+""" serializer = InputSerializer(data=form)
+if serializer.is_valid(): 
+
 
     def create(self, validated_data):
-        return ClassificationLabel.objects.create(**validated_data)
+        return ClassificationLabel.objects.create(**validated_data) 
+
+   
+   def Idrandom():
+        idrandom = ''.join([random.choices(string.ascii_letters + string.digits) for n in range(32)])
+        return idrandom
+   """
