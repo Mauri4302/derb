@@ -44,16 +44,16 @@ form = {
     'data':[
 {
             'id': '',
-            "type": "textfield",
+            'label': 'Textfield',
             'inputType': 'text',
-            'label': 'textfield',
-            "labelPosition": "text-center",
+            "labelPosition": "text-start",
             "placeholder": "PLace Holder...",
             "description":'',
                 "validate": {
-                "required": False,
+                "required": True,
                 "minLength": 2,
                 "maxLength": 45,
+                "step": 0
                 },
                 "conditional": {
                 "quetion_related": [''],
@@ -62,16 +62,16 @@ form = {
         },
 {
             'id': '',
-            "type": "number",
-            'inputType': 'number',
             'label': 'Number',
+            'inputType': 'number',
             "labelPosition": "text-center",
             "placeholder": "question number",
             "description":'',
                 "validate": {
                 "required": False,
-                "minLength": 2,
-                "maxLength": 45,
+                "minLength": 1,
+                "maxLength": 20,
+                    "step": 0
             },
                 "conditional": {
                 "quetion_related": '',
