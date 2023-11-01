@@ -1,0 +1,78 @@
+{% extends 'gentelella/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link href="{% static 'vendors/jquery-ui/jquery-ui.min.css' %}" rel="stylesheet">
+<link href="{% static 'vendors/bootstrap/bootstrap.min.css' %}" rel="stylesheet">
+<link href="{% static 'css/style.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+
+<h1>Formulario</h1>
+
+
+<div class="row">
+    <div class="card mb-3">
+        <div class="card-body">
+            <div class="card-title titles">
+                <h2> Response questions </h2>
+
+            </div>
+
+            <div class="row mb-2">
+
+                <!-- Columna de Contenedor -->
+                <div id="contentParent" style="" class="col-lg-10 col-md-6 col-sm-10 border">
+                    <div class="card-title titles">
+                        <h2> FORM </h2>
+                    </div>
+                    <form action="" method="POST" class="form-components" id="form_content_template">
+                        {% csrf_token %}
+                        <div class="form-components" id="">
+
+                            {% for item in json_data %}
+                            <!-- Componentes del formulario se agregarán aquí -->
+                            <div class="card template template" data-template="${data.id}"
+                                 data-template-class="template_${data.id}">
+                                <div class="card-body mt-3 ${data.labelPosition}" id="body-${data.id}">
+
+                                    <label for="input" class="form-label label-text"
+                                           id="">{{item.label}}</label>
+                                    <input type="{{item.inputType}}" id=""
+                                           class="form-control text-input" aria-describedby="input"
+                                           minlength="{{data.validate.minLength}}" maxlength="${item.validate.maxLength}"
+                                           step="{{item.validate.step}}" placeholder="{{item.placeholder}}"
+                                           {{ item.validate.required ? 'required' : ''}}>
+                                    <div id="desciption" class="form-text description" id="description">
+
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <button type="submit" class="btn btn-primary save-button">Guardar</button>
+                    </form>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+{% endblock %}
+
+{% block js %}
+
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"
+        integrity="sha256-eTyxS0rkjpLEo16uXTS0uVCS4815lc40K2iVpWDvdSY=" crossorigin="anonymous"></script>
+<script src="{% static 'js/widget.js' %}"></script>
+<script src="{% static 'js/field_number.js' %}"></script>
+{% endblock %}

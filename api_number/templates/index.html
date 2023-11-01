@@ -12,49 +12,144 @@
 <h1>Formulario</h1>
 
 
-   <div class="row">
+<div class="row">
     <div class="card mb-3">
-      <div class="card-body">
-        <div class="card-title titles">
-          <h2> Numerical questions </h2>
+        <div class="card-body">
+            <div class="card-title titles">
+                <h2> Numerical questions </h2>
 
-        </div>
+            </div>
 
-          <div class="row mb-2">
-    <!-- Columna de Componente -->
-    <div id="component" class="col-lg-2 col-md-6 col-sm-12 border">
-        <div class="card-title titles">
-            <h4> Componente</h4>
+            <div class="row mb-2">
+                <!-- Columna de Componente -->
+                <div id="component" class="col-lg-2 col-md-6 col-sm-12 border">
+                    <div class="card-title titles">
+                        <h4> Componente</h4>
+                    </div>
+
+                </div>
+
+                <!-- Columna de Contenedor -->
+                <div id="contentParent" style="" class="col-lg-10 col-md-6 col-sm-10 border">
+                    <div class="card-title titles">
+                        <h2> Contenedor </h2>
+                    </div>
+                    <form action="" method="POST" class="form-components" id="form_content_template">
+                        {% csrf_token %}
+                        <div class="form-components" id="">
+                            <!-- Componentes del formulario se agregarán aquí -->
+
+                        </div>
+                        <button type="submit" class="btn btn-primary save-button">Guardar</button>
+                    </form>
+
+                </div>
+
+            </div>
+
+
         </div>
 
     </div>
 
-    <!-- Columna de Contenedor -->
-              <div id="contentParent" style="" class= "col-lg-10 col-md-6 col-sm-10 border">
-                  <div class="card-title titles">
-            <h2> Contenedor </h2>
-        </div>
-                  <form action="" method="POST" class="form-components" id="form_content">
-                    {% csrf_token %}
-                       <div class="form-components">
-                    <!-- Componentes del formulario se agregarán aquí -->
+    <div class="modal fade" id="btn_modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <!-- <div class="modal-header"> -->
+                <div class="modal-header">
+                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
+                                    aria-selected="true">Display
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-profile" type="button" role="tab"
+                                    aria-controls="pills-profile" aria-selected="false">Validation
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-contact" type="button" role="tab"
+                                    aria-controls="pills-contact" aria-selected="false">Conditional
+                            </button>
+                        </li>
+                    </ul>
 
+
+                    <!--  </div> -->
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <!-- ACA VA EL TAB PARA PODER GUARDAR -->
+
+                    <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
+                             aria-labelledby="pills-home-tab">
+                            <!-- ACA VA EL: LABELNAME, LABELPOSITION, PLACEHOLDER Y EL DESCRIPTION -->
+                            <div class="form-group">
+                                <label for="labelname">Label</label>
+                                <input type="text" class="form-control modal-label" value="">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="labelPosition">LabelPsition</label>
+                                <select id="labelposition" class="form-select modal-select">
+                                    <option value="text-start">left</option>
+                                    <option value="text-center">center</option>
+                                    <option value="text-end">right</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="placeholder">Placeholder</label>
+                                <input type="text" class="form-control modal-placeholder" value="">
+                            </div>
+                            <!-- END -->
+                        </div>
+                        <div class="tab-pane fade" id="pills-profile" role="tabpanel"
+                             aria-labelledby="pills-profile-tab">
+                            <div class="form-check">
+                                <input class="form-check-input modal-required" type="checkbox" id="required">
+                                <label class="form-check-label" for="required">
+                                    Required
+                                </label>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="maximumlength">Maximum Length</label>
+                                <input type="number" class="form-control modal-max" value="">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="minimumlength">Minimum Length</label>
+                                <input type="number" class="form-control modal-min" value="">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="step">Step</label>
+                                <input type="text" class="form-control modal-step" value="">
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="pills-contact" role="tabpanel"
+                             aria-labelledby="pills-contact-tab">
+
+                        </div>
+                        <input type="hidden" id="current_data_id" value="">
                     </div>
-                      <button type="submit" class="btn btn-primary save-button">Guardar</button>
-                  </form>
-
-              </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="btn_save">Guardar Cambios</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>
-
-
-
-
-           </div>
-
-      </div>
-
-  </div>
 
 
 {% endblock %}
@@ -62,10 +157,11 @@
 {% block js %}
 
 <script>
-  document.form_url = {};
-  document.form_url.form_api = "{% url 'api' %}";
+    document.form_url = {};
+    document.form_url.form_api = "{% url 'api' %}";
 </script>
-<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js" integrity="sha256-eTyxS0rkjpLEo16uXTS0uVCS4815lc40K2iVpWDvdSY=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"
+        integrity="sha256-eTyxS0rkjpLEo16uXTS0uVCS4815lc40K2iVpWDvdSY=" crossorigin="anonymous"></script>
 <script src="{% static 'js/widget.js' %}"></script>
 <script src="{% static 'js/field_number.js' %}"></script>
 {% endblock %}

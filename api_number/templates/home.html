@@ -243,5 +243,807 @@
 
             return modal;
         }
+
+
+
+        'editing_modal': function(data){
+
+            let modal = `
+            <!-- Modal -->
+            <div class="modal fade" id="btn_modal" data-id="${data.id}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md" id="${data.id}">
+    <div class="modal-content">
+      <!-- <div class="modal-header"> -->
+    <div class="modal-header">
+         <ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Display</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Validation</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Conditional</button>
+  </li>
+</ul>
+
+
+    <!--  </div> -->
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+      <div class="modal-body">
+          <!-- ACA VA EL TAB PARA PODER GUARDAR -->
+
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+      <!-- ACA VA EL: LABELNAME, LABELPOSITION, PLACEHOLDER Y EL DESCRIPTION -->
+    <div class="form-group">
+        <label for="labelname">Label</label>
+        <input type="text" class="form-control modal-label" value="">
+    </div>
+
+      <div class="form-group">
+        <label for="labelPosition" >LabelPsition</label>
+        <select id="labelposition" class="form-select modal-select">
+            <option value="text-start">left</option>
+            <option value="text-center">center</option>
+            <option value="text-end">right</option>
+        </select>
+    </div>
+
+      <div class="form-group">
+        <label for="placeholder">Placeholder</label>
+        <input type="text" class="form-control modal-placeholder" value="">
+    </div>
+      <!-- END -->
+  </div>
+  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
+    <div class="form-check">
+  <input class="form-check-input modal-required" type="checkbox" id="required">
+  <label class="form-check-label" for="required">
+    Required
+  </label>
+</div>
+
+      <div class="form-group">
+        <label for="maximumlength">Maximum Length</label>
+        <input type="number" class="form-control modal-max" value="">
+    </div>
+
+      <div class="form-group">
+        <label for="minimumlength">Minimum Length</label>
+        <input type="number" class="form-control modal-min" value="">
+    </div>
+
+      <div class="form-group">
+        <label for="step">Step</label>
+        <input type="text" class="form-control modal-step" value="">
+    </div>
+
+  </div>
+  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">Conditional</div>
+</div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" data-btn="${dataID}" id="guardarCambiosBtn">Guardar Cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+           `;
+
+
+
+            return modal;
+        }
+
+'return_data': function(id){
+            for(let i=0; i< this.list.length; i++){
+            if(this.list[i].id === id){
+            return {
+            id: this.list[i].id,
+            label: this.list[i].label,
+            labelPosition: this.list[i].labelPosition,
+            placeholder: this.list[i].placeholder,
+            description: this.list[i].description,
+            validate: {
+                required: this.list[i].validate.required,
+                maxLength: this.list[i].validate.maxLength,
+                minLength: this.list[i].validate.minLength,
+                step: this.list[i].validate.step
+            },
+            conditional: {
+                quetion_related: this.list[i].conditional.quetion_related,
+                evaluate: this.list[i].conditional.evaluate
+            }
+            };
+            }
+            }
+            return null;
+        },
+
+
+
+     'editing_modal': function(data){
+
+            let modal = `
+            <!-- Modal -->
+            <div class="modal fade" id="btn_modal" data-id="${data.id}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md" id="${data.id}">
+    <div class="modal-content">
+      <!-- <div class="modal-header"> -->
+    <div class="modal-header">
+         <ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Display</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Validation</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Conditional</button>
+  </li>
+</ul>
+
+
+    <!--  </div> -->
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+      <div class="modal-body">
+          <!-- ACA VA EL TAB PARA PODER GUARDAR -->
+
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+      <!-- ACA VA EL: LABELNAME, LABELPOSITION, PLACEHOLDER Y EL DESCRIPTION -->
+    <div class="form-group">
+        <label for="labelname">Label</label>
+        <input type="text" class="form-control modal-label" value="${data.label}">
+    </div>
+
+      <div class="form-group">
+        <label for="labelPosition" >LabelPsition</label>
+        <select id="labelposition" class="form-select modal-select">
+            <option value="text-start" ${data.labelPosition === 'text-start' ? 'selected' : ''}>left</option>
+            <option value="text-center" ${data.labelPosition == 'text-center' ? 'selected' : ''}>center</option>
+            <option value="text-end" ${data.labelPosition == 'text-end' ? 'selected' : ''}>right</option>
+        </select>
+    </div>
+
+      <div class="form-group">
+        <label for="placeholder">Placeholder</label>
+        <input type="text" class="form-control modal-placeholder" value="${data.placeholder}">
+    </div>
+      <!-- END -->
+  </div>
+  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
+    <div class="form-check">
+  <input class="form-check-input modal-required" type="checkbox" id="required" ${data.validate.required ? 'checked' : ''}>
+  <label class="form-check-label" for="required">
+    Required
+  </label>
+</div>
+
+      <div class="form-group">
+        <label for="maximumlength">Maximum Length</label>
+        <input type="number" class="form-control modal-max" value="${data.validate.maxLength}">
+    </div>
+
+      <div class="form-group">
+        <label for="minimumlength">Minimum Length</label>
+        <input type="number" class="form-control modal-min" value="${data.validate.minLength}">
+    </div>
+
+      <div class="form-group">
+        <label for="step">Step</label>
+        <input type="text" class="form-control modal-step" value="${data.validate.step}">
+    </div>
+
+  </div>
+  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">Conditional</div>
+</div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" data-btn="${data.id}" id="guardarCambiosBtn">Guardar Cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+           `;
+
+            return modal;
+        },
+
+
+    'delete_element_list': function(id){
+
+            if (this.list) {
+            this.list = this.list.filter(item => item.id !== id);
+            //console.log("Eliminado de la Lista... ", id);
+            //console.log("Nueva Lista... ", this.list);
+            //console.log("IDS:: ", this.list)
+//                for (let i = 0; i < this.list.length; i++) {
+//                    if (this.list[i].id === id) {
+//                        this.list.splice(i, 1);
+//                        console.log("Eliminado de la Lista... ",id)
+//                        break;
+//                    }
+//
+//                }
+//                console.log("Nueva Lista... ", this.list)
+             }
+
+        },
+
+
+
+
+
+        'save_modal': function(dataID){
+            let templateID = $(this).closest('.template').data('id');
+            //let modalDataID = $("#btn_modal");
+            console.log("SAVE MODAL::: ",modalDataID)
+              if(templateID === modalDataID.data('data-id') && templateID === modalDataID.data('data-btn')) {
+                 $("#guardarCambiosBtn").on("click", function() {
+        // Obtener los valores del modal
+        let label = $('.modal-label').val();
+        let placeholder = $('.modal-placeholder').val();
+        let labelPosition = $('.modal-select').val();
+        let required = $('.modal-required').prop('checked');
+        let maxText = $('.modal-max').val();
+        let minText = $('.modal-min').val();
+        let step = $('.modal-step').val();
+
+        // Buscar el componente correspondiente en la lista
+        fmanager.list = fmanager.list.find(item => item.id === dataID);
+        //console.log("COMPONENT:::   ",component)
+        // Actualizar los valores del componente
+        fmanager.list.label = label;
+        fmanager.list.placeholder = placeholder;
+        fmanager.list.labelPosition = labelPosition;
+        fmanager.list.validate.required = required;
+        fmanager.list.validate.maxLength = maxText;
+        fmanager.list.validate.minLength = minText;
+        fmanager.list.validate.step = step;
+
+        // Actualizar la vista del componente
+        let componentElement = $(`[data-id="${dataID}"]`);
+        componentElement.find('.label-text').text(label);
+        componentElement.find('.text-input').attr('placeholder', placeholder);
+        componentElement.find('.card-body').removeClass().addClass(`card-body mt-4 ${labelPosition}`);
+        componentElement.find('.text-required').prop('checked', required);
+        componentElement.find('.text-input').attr('maxlength',maxText);
+        componentElement.find('.text-input').attr('minlength',minText);
+        componentElement.find('.text-input').attr('step',step);
+        // Cerrar el modal
+        $("#btn_modal").modal('hide');
+    });
+              }
+
+        }
+
+
+
+    'update_modal': function(){
+        let aux = [];
+        let btn_save = $(this);
+        console.log("THIS::: ",btn_save)
+        btn_save.on("click", function() {
+    let btn_save = $(this);
+    let component_save = btn_save.closest('#btn_modal');
+    let component_update = btn_save.closest('.template');
+
+    let id_save = component_save.data('id');
+    console.log("HHHH:: ",component_update, id_save)
+    // Obtener los valores del modal
+    let label = component_save.find('.modal-label').val();
+    let placeholder = component_save.find('.modal-placeholder').val();
+    let labelPosition = component_save.find('.modal-select').val();
+    let required = component_save.find('.modal-required').prop('checked');
+    let maxText = component_save.find('.modal-max').val();
+    let minText = component_save.find('.modal-min').val();
+    let step = component_save.find('.modal-step').val();
+
+    console.log("UPDATE_MODAL... ",label, placeholder, labelPosition, required, maxText, minText, step)
+
+         // Buscar el componente correspondiente en la lista
+        fmanager.list = fmanager.list.find(item => item.id === id_save);
+        console.log("COMPONENT:::   ",component)
+        // Actualizar los valores del componente
+        fmanager.list.label = label;
+        fmanager.list.placeholder = placeholder;
+        fmanager.list.labelPosition = labelPosition;
+        fmanager.list.validate.required = required;
+        fmanager.list.validate.maxLength = maxText;
+        fmanager.list.validate.minLength = minText;
+        fmanager.list.validate.step = step;
+        // Actualizar la vista del componente
+        component_update.find('.label-text').text(label);
+        component_update.find('.text-input').attr('placeholder', placeholder);
+        component_update.find('.label-text').removeClass().addClass(`form-label label-text ${labelPosition}`);
+        component_update.find('.text-input').prop('required', required);
+        component_update.find('.text-input').attr('maxlength', maxText);
+        component_update.find('.text-input').attr('minlength', minText);
+        component_update.find('.text-input').attr('step', step);
+
+        console.log("Actualizado::::: ",fmanager.list)
+        // Cerrar el modal
+        component_save.modal('hide');
+});
+
+    console.log("Elemento actualizado despues de editar: ", this.list)
+        $(document).on("click",'#guardarCambiosBtn', function() {
+            let btn_save = $(this);
+            let component_save = btn_save.closest('#btn_modal');
+            let component_update = btn_save.closest('.template');
+            console.log("COMPONENT_UPDATE:: ", component_update)
+            let id_save = component_save.data('btn');
+            // Obtener los valores del modal
+            let label_update = $('.modal-label').val();
+            let placeholder = $('.modal-placeholder').val();
+            let labelPosition = $('.modal-select').val();
+            let required = $('.modal-required').prop('checked');
+            let maxText = $('.modal-max').val();
+            let minText = $('.modal-min').val();
+            let step = $('.modal-step').val();
+            console.log("UPDATE:: ",label_update, placeholder, labelPosition, required, maxText, minText, step)
+            // Buscar el componente correspondiente en la lista
+
+
+        // Actualizar la vista del componente
+        //let componentElement = $(`[data-id="${id_save}"]`);
+        $('.label-text').text(label_update);
+        let inputElement = component_update.find('.text-input');
+        console.log("Input_update:: ", inputElement)
+        inputElement.attr('placeholder', placeholder);
+        component_update.find('.card-body').removeClass().addClass(`card-body mt-4 ${labelPosition}`);
+        inputElement.prop('required', (required === 'checked' ? 'required' : ''));
+        inputElement.attr('maxlength', maxText);
+        inputElement.attr('minlength', minText);
+        inputElement.attr('step', step);
+
+        // Cerrar el modal
+        component_save.modal('hide');
+        //console.log("Lista MOdificada::: ", fmanager.list)
+        });
+        },
+
+
+     'edit_component': function(){
+
+            //let labelElement, inputElement, descriptionElement, labelPosition,checkboxRequired = null;
+            let btn = $('');
+            let component = btn.closest('.template');
+            console.log("EDIT  ELEMENTS.. ",btn, component)
+         btn.on('click', function() {
+                //let dataID = $(this).closest('.template').data('id');
+//                let btn = $(this);
+//                var dataID = $(this).attr('id');
+//                let component = btn.closest('.template');
+                $(btn).modal('show');
+//                 let labelElement = component.find('.label-text');
+//                 let inputElement = component.find('.text-input');
+//                 let descriptionElement = component.find('.description');
+//                 let labelPosition = component.find('.card-body').attr('class').split(' ')[2];
+//                 let checkboxRequired = $('.modal-required');
+//
+//                console.log("ELEMENTOS::: ",labelElement,
+//                inputElement, descriptionElement,"Posi...", labelPosition, dataID," ----- ")
+//
+//                // Obtener los valores actuales del componente
+//                let label = labelElement.text();
+//                let placeholder = inputElement.attr("placeholder");
+//                let modalmin = inputElement.attr("minlength");
+//                let modalmax = inputElement.attr("maxlength");
+//                let modalstep = inputElement.attr("step");
+//                let description = descriptionElement.text();
+//                //let required =
+//                console.log("VALORES::: ",label, placeholder, modalmin, modalmax, modalstep, checkboxRequired, labelPosition)
+//
+//                $('.modal-label').val(label);
+//                $('.modal-placeholder').val(placeholder);
+//                //$('.description').val(description);
+//                $('.form-select').val(labelPosition);
+//                if (inputElement.prop('required')) {
+//                    // Activa el checkbox del modal
+//                    checkboxRequired.prop('checked', true);
+//                }
+//                $('.modal-required').val(modalmax);
+//                $('.modal-max').val(modalmax);
+//                $('.modal-min').val(modalmin);
+//                $('.modal-step').val(modalstep);
+//
+//                checkboxRequired.on('change', function() {
+//                   inputElement.prop('required', checkboxRequired.prop('checked'));
+//                });
+
+                });
+
+        }
+
+'delete_component': function(){
+        $('.delete-btn').on('click', function() {
+            $(this).closest('.template').remove();
+            console.log("COMPONENTE_ELIMINADO____ ")
+            });
+//        let component= null;
+//        let btn_delete = $(this);
+//        let id = '';
+//        console.log("BTN_DELETE:: ", btn_delete)
+//            btn_delete.on('click', function() {
+//                let btn_delete = $(this);
+//                component = btn_delete.closest('.template');
+//                id = component.data('id');
+//                //console.log("ID a eliminar de la lista global... ", id);
+//                component.remove();
+//                //console.log("Eliminado El Componente... ", id);
+//                for (let i = 0; i < this.list.length; i++) {
+//                    if (this.list[i].id === id) {
+//                        this.list.splice(i, 1);
+//                        console.log("Eliminado de la Lista... ",id)
+//                        break;
+//                    }
+//
+//                }
+//                console.log("NUEVA::  ",fmanager.list)
+//            });
+
+        }
+
+
+'editing_modal': function(data){
+
+            let modal = `
+            <!-- Modal -->
+            <div class="modal fade" id="btn_modal_${data.id}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <!-- <div class="modal-header"> -->
+    <div class="modal-header">
+         <ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Display</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Validation</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Conditional</button>
+  </li>
+</ul>
+
+
+    <!--  </div> -->
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+      <div class="modal-body">
+          <!-- ACA VA EL TAB PARA PODER GUARDAR -->
+
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+      <!-- ACA VA EL: LABELNAME, LABELPOSITION, PLACEHOLDER Y EL DESCRIPTION -->
+    <div class="form-group">
+        <label for="labelname">Label</label>
+        <input type="text" class="form-control modal-label" value="">
+    </div>
+
+      <div class="form-group">
+        <label for="labelPosition" >LabelPsition</label>
+        <select id="labelposition" class="form-select modal-select">
+            <option value="text-start">left</option>
+            <option value="text-center">center</option>
+            <option value="text-end">right</option>
+        </select>
+    </div>
+
+      <div class="form-group">
+        <label for="placeholder">Placeholder</label>
+        <input type="text" class="form-control modal-placeholder" value="">
+    </div>
+      <!-- END -->
+  </div>
+  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
+    <div class="form-check">
+  <input class="form-check-input modal-required" type="checkbox" id="required">
+  <label class="form-check-label" for="required">
+    Required
+  </label>
+</div>
+
+      <div class="form-group">
+        <label for="maximumlength">Maximum Length</label>
+        <input type="number" class="form-control modal-max" value="">
+    </div>
+
+      <div class="form-group">
+        <label for="minimumlength">Minimum Length</label>
+        <input type="number" class="form-control modal-min" value="">
+    </div>
+
+      <div class="form-group">
+        <label for="step">Step</label>
+        <input type="text" class="form-control modal-step" value="">
+    </div>
+
+  </div>
+  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">Conditional</div>
+</div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" id="btn_save_${data.id}">Guardar Cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+           `;
+
+            return modal;
+        }
+
+
+
+
+
+    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Display</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Validation</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Conditional</button>
+  </li>
+</ul>
+<div class="tab-content" id="pills-tabContent">
+  <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+         <!-- ACA VA EL: LABELNAME, LABELPOSITION, PLACEHOLDER Y EL DESCRIPTION -->
+    <div class="form-group">
+        <label for="labelname">Label</label>
+        <input type="text" class="form-control modal-label" value="">
+    </div>
+
+      <div class="form-group">
+        <label for="labelPosition" >LabelPsition</label>
+        <select id="labelposition" class="form-select modal-select">
+            <option value="text-start">left</option>
+            <option value="text-center">center</option>
+            <option value="text-end">right</option>
+        </select>
+    </div>
+
+      <div class="form-group">
+        <label for="placeholder">Placeholder</label>
+        <input type="text" class="form-control modal-placeholder" value="">
+    </div>
+      <!-- END -->
+  </div>
+  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+       <div class="form-check">
+  <input class="form-check-input modal-required" type="checkbox" id="required">
+  <label class="form-check-label" for="required">
+    Required
+  </label>
+</div>
+
+      <div class="form-group">
+        <label for="maximumlength">Maximum Length</label>
+        <input type="number" class="form-control modal-max" value="">
+    </div>
+
+      <div class="form-group">
+        <label for="minimumlength">Minimum Length</label>
+        <input type="number" class="form-control modal-min" value="">
+    </div>
+
+      <div class="form-group">
+        <label for="step">Step</label>
+        <input type="text" class="form-control modal-step" value="">
+    </div>
+  </div>
+  <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+
+  </div>
+</div>
+
+
+
+
+    'editing_modal': function(data){
+
+            let modal = `
+            <!-- Modal -->
+            <div class="modal fade" id="btn_modal_${data.id}" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <!-- <div class="modal-header"> -->
+    <div class="modal-header">
+         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Display</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Validation</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Conditional</button>
+  </li>
+</ul>
+
+
+    <!--  </div> -->
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+      <div class="modal-body">
+          <!-- ACA VA EL TAB PARA PODER GUARDAR -->
+
+<div class="tab-content" id="pills-tabContent">
+  <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+         <!-- ACA VA EL: LABELNAME, LABELPOSITION, PLACEHOLDER Y EL DESCRIPTION -->
+    <div class="form-group">
+        <label for="labelname">Label</label>
+        <input type="text" class="form-control modal-label" value="">
+    </div>
+
+      <div class="form-group">
+        <label for="labelPosition" >LabelPsition</label>
+        <select id="labelposition" class="form-select modal-select">
+            <option value="text-start">left</option>
+            <option value="text-center">center</option>
+            <option value="text-end">right</option>
+        </select>
+    </div>
+
+      <div class="form-group">
+        <label for="placeholder">Placeholder</label>
+        <input type="text" class="form-control modal-placeholder" value="">
+    </div>
+      <!-- END -->
+  </div>
+  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+       <div class="form-check">
+  <input class="form-check-input modal-required" type="checkbox" id="required">
+  <label class="form-check-label" for="required">
+    Required
+  </label>
+</div>
+
+      <div class="form-group">
+        <label for="maximumlength">Maximum Length</label>
+        <input type="number" class="form-control modal-max" value="">
+    </div>
+
+      <div class="form-group">
+        <label for="minimumlength">Minimum Length</label>
+        <input type="number" class="form-control modal-min" value="">
+    </div>
+
+      <div class="form-group">
+        <label for="step">Step</label>
+        <input type="text" class="form-control modal-step" value="">
+    </div>
+  </div>
+  <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+
+  </div>
+</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" id="btn_save_${data.id}">Guardar Cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+           `;
+
+            return modal;
+        }
+
+
+    'update_list': function(data){
+
+        for(let i=0; i < list.length; i++){
+        console.log("UPDATE TEMP:: ",list[i].id, data.id)
+        if(this.list[i].id === data.id){
+        console.log("FOR::: ", data, this.list[i])
+             data.label = this.list[i].label;
+             data.labelPosition = this.list[i].labelPosition;
+             data.placeholder = this.list[i].placeholder;
+             data.description = this.list[i].description;
+             data.validate.required = this.list[i].validate.required;
+             data.validate.maxLength = this.list[i].validate.maxLength;
+             data.validate.minLength = this.list[i].validate.minLength;
+             data.validate.step = this.list[i].validate.step;
+            return;
+        }
+        }
+
+        }
+
+
+
+
+
+    'update_modal': function(fmanager) {
+        //var manager = fmanager;
+        // Evento click en el botón de guardar cambios del modal
+        return function() {
+        let id_modal = $('#current_data_id').val();
+         list = list.filter(item => item.id === id_modal);
+            console.log("ACTUALIZANDO... ", list)
+        // Obtener los valores del modal de edición
+        var label = $('#labelname').val();
+        var labelPosition = $('#labelposition').val();
+        var placeholder = $('#placeholder').val();
+        var required = $('#required').prop('checked');
+        var maxLength = $('#maximumlength').val();
+        var minLength = $('#minimumlength').val();
+        var step = $('#step').val();
+
+
+        console.log("ACTUALIZADO.... ", list)
+        // Actualizar los valores en el elemento original
+        var template = $('.template.active');
+        template.find('.modal-label').val(label);
+        template.find('.modal-select').val(labelPosition);
+        template.find('.modal-placeholder').val(placeholder);
+        template.find('.modal-required').prop('checked', required);
+        template.find('.modal-max').val(maxLength);
+        template.find('.modal-min').val(minLength);
+        template.find('.modal-step').val(step);
+
+        // Cerrar el modal de edición
+        $('#btn_modal').modal('hide');
+
+        }
+        }
+
+
+
+
+    'update_modal': function(item) {
+        //var manager = fmanager;
+        // Evento click en el botón de guardar cambios del modal
+        //let id_modal = $('#current_data_id').val();
+         //list = list.filter(item => item.id === id_modal);
+            console.log("ACTUALIZANDO... ", list)
+        // Obtener los valores del modal de edición
+//        var label = $('#labelname').val();
+//        var labelPosition = $('#labelposition').val();
+//        var placeholder = $('#placeholder').val();
+//        var required = $('#required').prop('checked');
+//        var maxLength = $('#maximumlength').val();
+//        var minLength = $('#minimumlength').val();
+//        var step = $('#step').val();
+
+
+        console.log("ACTUALIZADO.... ", list)
+        // Actualizar los valores en el elemento original
+        var template = $('.template.active');
+        template.find('.modal-label').val(item.label);
+        template.find('.modal-select').val(item.labelPosition);
+        template.find('.modal-placeholder').val(item.placeholder);
+        template.find('.modal-required').prop('checked', item.validate.required);
+        template.find('.modal-max').val(item.validate.maxLength);
+        template.find('.modal-min').val(item.validate.minLength);
+        template.find('.modal-step').val(item.validate.step);
+
+        // Cerrar el modal de edición
+        $('#btn_modal').modal('hide');
+
+        }
 </script>
 {% endblock %}

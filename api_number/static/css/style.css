@@ -15,7 +15,7 @@
     min-height: 300px;
 }
 
-#form_content{
+#form_content_template{
     overflow-y: auto;
     max-height: 240px !important;
     min-height: 240px !important;
