@@ -107,14 +107,14 @@
                 fmanager.repositionSaveButton();
                 fmanager.delete_component();
                 fmanager.edit_component(data.id);
-
+                fmanager.update_modal();
 
                  console.log("ID_IN_DROP",data.id)
-
+                //$('#btn_save').on('click', fmanager.update_modal(fmanager));
                 }
 
             });
-            $('#btn_save').on('click', fmanager.update_modal(fmanager));
+            //$('#btn_save').on('click', this.update_modal());
 //            fmanager.update_modal(fmanager);
         },
         //Metodo que me permite mantener el boton del formulario siempre abajo
@@ -169,39 +169,50 @@
             });
         });
         },
-        'update_modal': function(fmanager) {
-        var manager = fmanager;
-        // Evento click en el botón de guardar cambios del modal
-        var aux = {};
-        return function() {
+        'update_modal': function() {
+        $('#btn_save').on('click', function(){
+
         let id_modal = $('#current_data_id').val();
-         aux = list.find(item => item.id === id_modal);
-            console.log("ACTUALIZANDO... ", list)
+            console.log("ACTUALIZANDO... ", list, id_modal)
+
         // Obtener los valores del modal de edición
-        var label = $('#labelname').val();
-        var labelPosition = $('#labelposition').val();
-        var placeholder = $('#placeholder').val();
-        var required = $('#required').prop('checked');
-        var maxLength = $('#maximumlength').val();
-        var minLength = $('#minimumlength').val();
-        var step = $('#step').val();
+        let label = $('.modal-label').val();
+        let labelPosition = $('.modal-select').val();
+        let placeholder = $('.modal-placeholder').val();
+        let required = $('.modal-required').prop('checked');
+        let maxLength = $('.modal-max').val();
+        let minLength = $('.modal-min').val();
+        let step = $('.modal-step').val();
+
+        //ACTUALIZANDO EL ELEMENTO DE LA LISTA
+        list.forEach(function(item){
+            if(item.id === id_modal){
+                item.label = label;
+                item.labelPosition = labelPosition;
+                item.placeholder = placeholder;
+                item.validate.required = required === 'checked' ? 'True' : 'False';
+                item.validate.maxLength = maxLength;
+                item.validate.minLength = minLength;
+                item.validate.step = step;
+            }
+            });
 
 
-        console.log("ACTUALIZADO.... ", list)
         // Actualizar los valores en el elemento original
         var template = $('.template.active');
-        template.find('.modal-label').val(label);
-        template.find('.modal-select').val(labelPosition);
-        template.find('.modal-placeholder').val(placeholder);
-        template.find('.modal-required').prop('checked', required);
-        template.find('.modal-max').val(maxLength);
-        template.find('.modal-min').val(minLength);
-        template.find('.modal-step').val(step);
+        template.find('.text-'+id_modal).val(label);
+        template.find('.card-body').removeClass().addClass(`card-body mt-4 ${labelPosition}`);
+        template.find('.text-input').attr(placeholder);
+        template.find('.text-input').prop('checked', required);
+        template.find('.text-input').attr(maxLength);
+        template.find('.text-input').attr(minLength);
+        template.find('.text-input').attr(step);
 
         // Cerrar el modal de edición
         $('#btn_modal').modal('hide');
-
-        }
+        console.log("ACTUALIZADO.... ", list, template)
+//        }
+        });
         },
 
         'process_children': function(children, context){
@@ -295,9 +306,9 @@
     <div class="card template template_${data.id}" data-template="${data.id}" data-template-class="template_${data.id}">
     <div class="card-body mt-3 ${data.labelPosition}" id="body-${data.id}">
 
-        <label for="input" class="form-label label-text" id="label-${data.id}">${data.label}</label>
+        <label for="input" class="form-label text-label" id="label-${data.id}">${data.label}</label>
         <input type="${data.inputType}" id="input-${data.id}" class="form-control text-input" aria-describedby="input" minlength="${data.validate.minLength}" maxlength="${data.validate.maxLength}" step="${data.validate.step}" placeholder="${data.placeholder}" ${data.validate.required ? 'required' : ''}>
-        <div id="desciption" class="form-text description" id="description-${data.id}">
+        <div id="desciption" class="form-text text-description" id="description-${data.id}">
             ${data.description}
         </div>
 
