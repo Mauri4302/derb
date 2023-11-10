@@ -2,7 +2,7 @@ import random
 import string
 
 from rest_framework import serializers
-from .models import InputSetting, InputField
+from .models import InputSetting, InputField, CustomForm
 from .form_number import form
 
 
@@ -27,15 +27,7 @@ class InputSerializer(serializers.Serializer):
     validations = ValidationSerializer()
     conditional = ConditionalSerializer()
 
-""" serializer = InputSerializer(data=form)
-if serializer.is_valid(): 
-
-
-    def create(self, validated_data):
-        return ClassificationLabel.objects.create(**validated_data) 
-
-   
-   def Idrandom():
-        idrandom = ''.join([random.choices(string.ascii_letters + string.digits) for n in range(32)])
-        return idrandom
-   """
+class CustomFormSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomForm
+        fields = '__all__'

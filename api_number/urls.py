@@ -1,15 +1,14 @@
-from django.urls import path, include
-from api_number.views import ApiView
+from django.urls import path, include, re_path
+from api_number.views import ApiView, save_data_form
 from rest_framework.routers import DefaultRouter
-from .views import ApiView, InputFieldViewSet
-from api_number.views import derb, api, guardar_json, my_view
+#from .views import ApiView, InputFieldViewSet
+from api_number.views import derb, api, my_view
 router = DefaultRouter()
-router.register(r'inputs', InputFieldViewSet)
+#router.register(r'inputs', InputFieldViewSet)
 
 urlpatterns =  [
     #path('api', include(router.urls)),
-    path('derb', derb, name="derb"),
-    path('derb/save', guardar_json, name="save_form"),
-    path('show', my_view, name="show"),
-    path('api', api, name="api")
+    re_path('derb/(?P<id>\d+)?', derb, name="derb"),
+    path('derb/save', save_data_form, name="save_form"),
+    path('api/<int:id>', api, name="api")
 ]

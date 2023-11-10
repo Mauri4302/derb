@@ -1,9 +1,11 @@
 
-from django.shortcuts import render
-
+from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse
 from rest_framework import viewsets
-from .models import InputSetting, InputField
-from .serializers import InputSerializer
+from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
+
+from .models import InputSetting, InputField, CustomForm
+from .serializers import InputSerializer, CustomFormSerializer
 from api_number.form_number import form
 from django.http import JsonResponse
 import json
@@ -14,25 +16,29 @@ def ApiView(request):
 
     return render(request,'home.html')
 
-def derb(request):
-    #data = InputSerializer()
-    #context = {'data':data}
-    return render(request, 'index.html')
+def derb(request, id=None):
+    if id is None:
+        customForm = CustomForm.objects.create()
+        return redirect(reverse('derb',args=[customForm.pk]))
 
-def api(request):
-    #form = InputSerializer()
-    return JsonResponse(form)
+    context = get_object_or_404(CustomForm, pk=id)
+    context = {'data':context}
+    return render(request, 'index.html', context)
+
+def api(request, id):
+    formData = get_object_or_404(CustomForm, pk=id)
+
+    return JsonResponse(formData.data or form)
 
 #Metodo para guardar datos en el archivo json
-def guardar_json(request):
+def save_data_form(request):
     if request.method == 'POST':
-        form_data = json.loads(request.body)
-        print("DJANGO.... ", form_data)
-        # Procesa y guarda los datos en un archivo JSON
-        with open('datos.json', 'a') as json_file:
-            json.dump(form_data, json_file)
-            data = extract_data_from_json('datos.json')
-        return JsonResponse({'message': 'Datos guardados correctamente.', 'data': data})
+        form_data = request.data
+        if form_data.is_valid():
+            print("DJANGO.... ", form_data)
+            return JsonResponse({'message': 'Datos guardados correctamente.'})
+        else:
+            return JsonResponse({'error': 'Formulario no válido.'}, status=400)
     else:
         return JsonResponse({'error': 'Método no permitido.'}, status=405)
 
@@ -50,7 +56,8 @@ def my_view(request):
     json_data = extract_data_from_json('datos.json')
     return render(request, 'response.html', {'json_data': json_data})
 
-class InputFieldViewSet(viewsets.ModelViewSet):
-    queryset = InputField.objects.all()
-    serializer_class = InputSerializer
+class CustomFormViewSet(viewsets.ModelViewSet):
+    queryset = CustomForm.objects.all()
+    serializer_class = CustomFormSerializer
+
 

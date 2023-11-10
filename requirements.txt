@@ -6,3 +6,4 @@ markdown>=3.4.1
 Pillow
 django>=4.0
 django_filter>=22.1
+djgentelella

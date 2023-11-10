@@ -51,9 +51,9 @@ form = {
             "description":'',
                 "validate": {
                 "required": True,
-                "minLength": 2,
-                "maxLength": 45,
-                "step": 0
+                "minLength": 2.1,
+                "maxLength": 45.1,
+                "step": 0.1
                 },
                 "conditional": {
                 "quetion_related": [''],
@@ -69,9 +69,9 @@ form = {
             "description":'',
                 "validate": {
                 "required": False,
-                "minLength": 1,
-                "maxLength": 20,
-                    "step": 0
+                "minLength": 1.1,
+                "maxLength": 20.1,
+                    "step": 0.1
             },
                 "conditional": {
                 "quetion_related": '',
