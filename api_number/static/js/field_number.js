@@ -7,7 +7,7 @@
 
   }*/
 
-  function  FormManager(container_id, api_url){
+  function  FormManager(container_id, api_url, ){
   var list = [];
     var fmanager = {
         'qid': null,
@@ -30,30 +30,29 @@
         'save_form': function(){
          $(document).on("submit", "#form_content_template", function(event) {
             event.preventDefault(); // Previene que el formulario se envíe normalmente
-
-            //let formData = new FormData(form)
-//            const plainFormData = Object.fromEntries(formData.entries());
-//	        const formDataJsonString = JSON.stringify(plainFormData);
             // Obtén los datos del formulario
             var formData = new FormData(this);
             const plainFormData = Object.fromEntries(formData.entries());
-	        //const formDataJsonString = JSON.stringify(plainFormData);
 
             // Crea un objeto para almacenar los datos del formulario
             var jsonData = {};
             list.forEach(function(value, key) {
                 jsonData[key] = value;
             });
-            const formDataJsonString = JSON.stringify(plainFormData);
-            fetch("derb/save", {
+            console.log("POST... ",jsonData)
+            const formDataJsonString = JSON.stringify(jsonData);
+            console.log(formDataJsonString,"----------")
+            data = {data: formDataJsonString};
+            let xx = {};
+            xx['data'] = jsonData
+            fetch('/save/form', {
             method: "POST",
-
             headers: {
             "Content-Type": "application/json",
             "Accept": "application/json",
             'X-CSRFToken': fmanager.get_cookie('csrftoken'),
             },
-            body: formDataJsonString
+            body: JSON.stringify(xx)
         })
         .then(response => response.json())
         .then(data => {

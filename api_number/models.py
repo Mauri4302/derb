@@ -39,3 +39,4 @@ class QuestionCondition(models.Model):
 class CustomForm(models.Model):
     description = models.CharField(max_length=230, default='myform')
     data = models.JSONField(null=True)
+

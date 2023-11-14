@@ -30,4 +30,5 @@ class InputSerializer(serializers.Serializer):
 class CustomFormSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomForm
-        fields = '__all__'
+        #fields = '__all__'
+        fields = ['description', 'data']
