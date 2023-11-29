@@ -1045,5 +1045,34 @@
         $('#btn_modal').modal('hide');
 
         }
+
+
+
+
+    'setting': function(){
+//        var document.input_setting = "{% url 'inputsettings-list' %}";
+//        fetch(document.input_setting,{credentials: 'include'})
+//        .then(response => response.json())
+//        .then(data => {
+//        // Manipula los datos recibidos como desees
+//        console.log('Datos recibidos desde el backend:', data);
+//
+//        // Puedes mostrar los datos en el HTML o realizar otras operaciones aquí
+//        })
+//        .catch(error => {
+//        console.error('Error al obtener datos desde el backend:', error);
+//        });
+        },
+
+<!--    var formData = {{ data.data|json_script:"formData" }};-->
+<!--    document.input_setting = {-->
+<!--        form_api: "{% url 'api/inputsettings' %}",-->
+<!--        context: {-->
+<!--            pk: {{ data.pk }},-->
+<!--            description: "{{ data.description }}",-->
+<!--            data: JSON.parse(formData.dataset.formData),-->
+<!--        }-->
+<!--    };-->
+<!--    console.log("DATOS REALES DESDE DB... ", document.form_url.context);-->
 </script>
 {% endblock %}

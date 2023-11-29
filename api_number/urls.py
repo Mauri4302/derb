@@ -1,16 +1,18 @@
 from django.urls import path, include, re_path
-from api_number.views import ApiView, save_data_form
+from api_number.views import ApiView, save_data_form, InputSettingViewSet, InputFieldViewSet, NumberInputFieldViewSet, \
+    QuestionConditionViewSet
 from rest_framework.routers import DefaultRouter
-#from .views import ApiView, InputFieldViewSet
 from api_number.views import derb, api
 router = DefaultRouter()
-#router.register(r'inputs', InputFieldViewSet)
+router.register(r'inputsettings', InputSettingViewSet, basename='inputsettings')
+router.register(r'inputfields', InputFieldViewSet, basename='inputfield')
+router.register(r'numberinputfields', NumberInputFieldViewSet, basename='numberinputfields')
+router.register(r'questionconditions', QuestionConditionViewSet, basename='questioncondition')
 
 urlpatterns =  [
-    #path('api', include(router.urls)),
-    #re_path('derb/(?P<id>\d+)?', derb, name="derb"),
-    path('derb/', derb, name="derb"),
-    path('derb/<int:id>/', derb, name="derb"),
+    path('', include(router.urls)),
+    re_path('derb/(?P<id>\d+)?', derb, name="derb"),
     path('save/form', save_data_form, name="save_form"),
-    path('api/<int:id>', api, name="api")
+    path('api/<int:id>', api, name="api"),
+    path('response/', derb, name='response')
 ]

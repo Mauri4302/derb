@@ -3,9 +3,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from rest_framework import viewsets
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
-
-from .models import InputSetting, InputField, CustomForm
-from .serializers import InputSerializer, CustomFormSerializer
+from .models import InputSetting, InputField, CustomForm, NumberInputField, QuestionCondition
+from .serializers import CustomFormSerializer, InputSettingSerializer, InputFieldSerializer, NumberInputFieldSerializer, \
+    QuestionConditionSerializer
 from api_number.form_number import form
 from django.http import JsonResponse
 import json
@@ -18,11 +18,11 @@ def ApiView(request):
 
 def derb(request, id=None):
     if id is None:
-        customForm = CustomForm.objects.create()
-        return redirect(reverse('derb',args=[customForm.pk]))
+        custom_form = CustomForm.objects.create()
+        return redirect(reverse('derb',args=[custom_form.pk]))
 
-    context = get_object_or_404(CustomForm, pk=id)
-    context = {'data':context, 'HOLA': context}
+    custom_form = get_object_or_404(CustomForm, pk=id)
+    context = {'data':custom_form}
     return render(request, 'index.html', context)
 
 def api(request, id):
@@ -37,8 +37,7 @@ def save_data_form(request):
         form_data = json.loads(request.body)
         serializer = CustomFormSerializer(data=form_data)
         print("DATA... ", form_data)
-        # Crear una instancia del serializador
-        #serializer = CustomFormSerializer(data=form_data)
+
         if serializer.is_valid():
             #print("DJANGO.... ", serializer)
             serializer.save()
@@ -48,22 +47,49 @@ def save_data_form(request):
     else:
         return JsonResponse({'error': 'Método no permitido.'}, status=405)
 
-#Meotodo para extraer datos del archivo json
-# def extract_data_from_json(file_path):
-#     with open(file_path) as json_file:
-#         data = json_file.read()
-#
-#         data = data.replace('}{', '},{')
-#         data = f'[{data}]'
-#         data = json.loads(data)
-#         return data
 
-# def my_view(request):
-#     json_data = extract_data_from_json('datos.json')
-#     return render(request, 'response.html', {'json_data': json_data})
+#Utilizando los modelos y asi poder trabajar con base de datos.
 
-class CustomFormViewSet(viewsets.ModelViewSet):
-    queryset = CustomForm.objects.all()
-    serializer_class = CustomFormSerializer
+class InputSettingViewSet(viewsets.ModelViewSet):
+    queryset = InputSetting.objects.all()
+    serializer_class = InputSettingSerializer
 
+    def list(self, request, *args, **kwargs):
+        # Obtener los datos del queryset
+        queryset = self.get_queryset()
+        serializer = self.get_serializer(queryset, many=True)
+        # Devolver los datos en formato JSON
+        return JsonResponse(serializer.data, safe=False)
 
+class InputFieldViewSet(viewsets.ModelViewSet):
+    queryset = InputField.objects.all()
+    serializer_class = InputFieldSerializer
+
+    def list(self, request, *args, **kwargs):
+        # Obtener los datos del queryset
+        queryset = self.get_queryset()
+        serializer = self.get_serializer(queryset, many=True)
+        # Devolver los datos en formato JSON
+        return JsonResponse(serializer.data, safe=False)
+
+class NumberInputFieldViewSet(viewsets.ModelViewSet):
+    queryset = NumberInputField.objects.all()
+    serializer_class = NumberInputFieldSerializer
+
+    def list(self, request, *args, **kwargs):
+        # Obtener los datos del queryset
+        queryset = self.get_queryset()
+        serializer = self.get_serializer(queryset, many=True)
+        # Devolver los datos en formato JSON
+        return JsonResponse(serializer.data, safe=False)
+
+class QuestionConditionViewSet(viewsets.ModelViewSet):
+    queryset = QuestionCondition.objects.all()
+    serializer_class = QuestionConditionSerializer
+
+    def list(self, request, *args, **kwargs):
+        # Obtener los datos del queryset
+        queryset = self.get_queryset()
+        serializer = self.get_serializer(queryset, many=True)
+        # Devolver los datos en formato JSON
+        return JsonResponse(serializer.data, safe=False)

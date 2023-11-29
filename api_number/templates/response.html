@@ -33,17 +33,17 @@
 
                             {% for item in json_data %}
                             <!-- Componentes del formulario se agregarán aquí -->
-                            <div class="card template template" data-template="${data.id}"
-                                 data-template-class="template_${data.id}">
-                                <div class="card-body mt-3 ${data.labelPosition}" id="body-${data.id}">
+                            <div class="card template template" data-template="{{ item.id }}"
+                                 data-template-class="template_{{ item.id }}">
+                                <div class="card-body mt-3 {{ item.labelPosition }}" id="body-{{ item.id }}">
 
                                     <label for="input" class="form-label label-text"
-                                           id="">{{item.label}}</label>
-                                    <input type="{{item.inputType}}" id=""
+                                           id="">{{ item.label }}</label>
+                                    <input type="{{ item.inputType }}"
                                            class="form-control text-input" aria-describedby="input"
-                                           minlength="{{data.validate.minLength}}" maxlength="${item.validate.maxLength}"
-                                           step="{{item.validate.step}}" placeholder="{{item.placeholder}}"
-                                           {{ item.validate.required ? 'required' : ''}}>
+                                           minlength="{{ item.validate.minLength }}" maxlength="{{ item.validate.maxLength }}"
+                                           step="{{ item.validate.step }}" placeholder="{{ item.placeholder }}"
+                                           {{ item.validate.required|yesno:"required," }}>
                                     <div id="desciption" class="form-text description" id="description">
 
                                     </div>

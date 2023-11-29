@@ -7,8 +7,9 @@
 
   }*/
 
-  function  FormManager(container_id, api_url, ){
+  function  FormManager(container_id, api_url){
   var list = [];
+  var question_related = [];
     var fmanager = {
         'qid': null,
         'id': container_id,
@@ -26,6 +27,13 @@
 
                   ).catch((error)=>{console.log(error)})
         this.save_form();
+        this.setting();
+        this.number_field();
+        },
+        'clean_html':function(){
+            while($('#form-template').first().length > 0){
+                $('#form-template').first().remove();
+            }
         },
         'save_form': function(){
          $(document).on("submit", "#form_content_template", function(event) {
@@ -42,9 +50,8 @@
             console.log("POST... ",jsonData)
             const formDataJsonString = JSON.stringify(jsonData);
             console.log(formDataJsonString,"----------")
-            data = {data: formDataJsonString};
-            let xx = {};
-            xx['data'] = jsonData
+            let data = {};
+            data['data'] = jsonData
             fetch('/save/form', {
             method: "POST",
             headers: {
@@ -52,7 +59,7 @@
             "Accept": "application/json",
             'X-CSRFToken': fmanager.get_cookie('csrftoken'),
             },
-            body: JSON.stringify(xx)
+            body: JSON.stringify(data)
         })
         .then(response => response.json())
         .then(data => {
@@ -63,9 +70,51 @@
         .catch(error => {
         console.error("Error al enviar el formulario:", error);
         });
-        let clean = document.getElementById('form_content_template');
-        clean.reset();
-    });
+        fmanager.clean_html();
+        });
+
+        },
+            'setting': function(){
+
+        fetch(document.input_setting, {
+        method: 'GET',
+        headers: {
+            'X-CSRFToken': getCookie('csrftoken'),
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+    })
+        .then(response => response.json())
+        .then(data => {
+        // Manipula los datos recibidos como desees
+        console.log('Datos recibidos desde el backend:', data);
+
+        // Puedes mostrar los datos en el HTML o realizar otras operaciones aquí
+        })
+        .catch(error => {
+        console.error('Error al obtener datos desde el backend:', error);
+        });
+        },
+        'number_field': function(){
+
+        fetch(document.number_field, {
+        method: 'GET',
+        headers: {
+            'X-CSRFToken': getCookie('csrftoken'),
+            'Content-Type': 'application/json'
+        },
+        credentials: 'include'
+    })
+        .then(response => response.json())
+        .then(data => {
+        // Manipula los datos recibidos como desees
+        console.log('Datos recibidos desde el backend:', data);
+
+        // Puedes mostrar los datos en el HTML o realizar otras operaciones aquí
+        })
+        .catch(error => {
+        console.error('Error al obtener datos desde el backend:', error);
+        });
         },
         'base_request_success': function(instance){
             return function(data){
@@ -85,7 +134,7 @@
         'process_forms': function(){
         let context = {'has_error': false, 'parent': this.id};
         this.process_children(this.form_data['data'], context);
-        let data= null;
+
         $("#form_content_template").droppable({
                 accept: $('.builder-component'),
                 activeClass: "active",
@@ -110,6 +159,8 @@
                 fmanager.delete_component();
                 fmanager.edit_component(data.id);
                 fmanager.update_modal();
+
+                fmanager.modal_question();
 
                  console.log("ID_IN_DROP",data.id)
                 //$('#btn_save').on('click', fmanager.update_modal(fmanager));
@@ -163,7 +214,7 @@
              console.log("ITEM... ", item)
             if(item.id === btn_id){
 
-                $('.modal-label').val(item.label);
+                $('.modal-label-value').val(item.label);
                 $('.modal-input').val(item.inputType);
                 $('.modal-select').val(item.labelPosition);
                 $('.modal-placeholder').val(item.placeholder);
@@ -172,6 +223,7 @@
                 $('.modal-max').val(item.validate.maxLength);
                 $('.modal-min').val(item.validate.minLength);
                 $('.modal-step').val(item.validate.step);
+                $('.modal-evaluate').val(item.conditional.evaluate);
             }
             });
         });
@@ -182,7 +234,7 @@
         let id_modal = $('#current_data_id').val();
 
         // Obtener los valores del modal de edición
-        let label = $('.modal-label').val();
+        let label = $('.modal-label-value').val();
         let inputType = $('.modal-input').val();
         let labelPosition = $('.modal-select').val();
         let placeholder = $('.modal-placeholder').val();
@@ -190,10 +242,7 @@
         let maxLength = $('.modal-max').val();
         let minLength = $('.modal-min').val();
         let step = $('.modal-step').val();
-       /* let checked;
-        required.on('change', function(){
-
-        })*/
+        let evaluate = $('.modal-evaluate');
 
         //ACTUALIZANDO EL ELEMENTO DE LA LISTA
         list.forEach(function(item){
@@ -206,14 +255,16 @@
                 item.validate.maxLength = maxLength;
                 item.validate.minLength = minLength;
                 item.validate.step = step;
+                item.conditional.evaluate = evaluate;
             }
             });
 
 
         // Actualizar los valores en el elemento original
         var template = $('#template_'+id_modal);
-        console.log("ACTUALIZADO.... ", list, template)
-        template.find('.text-label').val(label);
+        console.log("ACTUALIZADO.... ", list, template, " LABEL... ",label)
+        template.find('.text-label').text(label);
+        //template.find('#label_'+id_modal).val(label);
         template.find('.card-body').removeClass().addClass(`card-body mt-4 ${labelPosition}`);
         template.find('.text-input').attr('placeholder', placeholder);
         template.find('.text-input').attr('type', inputType);
@@ -345,6 +396,13 @@
         //Get the CSRF Token
        'get_cookie': function(name){
            return getCookie(name);
+       },
+
+       'modal_question': function(){
+            $('#btn_add_question').click(function() {
+            // Abrir el modal
+            $('#btn_modal_related').modal('show');
+        });
        },
 
     }

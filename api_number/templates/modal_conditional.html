@@ -1,79 +1,26 @@
-{% extends 'gentelella/base.html' %}
-{% load static %}
 
-{% block extra_css %}
-<link href="{% static 'vendors/jquery-ui/jquery-ui.min.css' %}" rel="stylesheet">
-<link href="{% static 'vendors/bootstrap/bootstrap.min.css' %}" rel="stylesheet">
-<link href="{% static 'css/style.css' %}" rel="stylesheet">
-{% endblock %}
-
-{% block content %}
-
-<h1>Formulario</h1>
-
-
-<div class="row">
-    <div class="card mb-3">
-        <div class="card-body">
-            <div class="card-title titles">
-                <h2> Numerical questions </h2>
-
-            </div>
-
-            <div class="row mb-2">
-                <!-- Columna de Componente -->
-                <div id="component" class="col-lg-2 col-md-6 col-sm-12 border">
-                    <div class="card-title titles">
-                        <h4> Componente</h4>
-                    </div>
-
-                </div>
-
-                <!-- Columna de Contenedor -->
-                <div id="contentParent" style="" class="col-lg-10 col-md-6 col-sm-10 border">
-                    <div class="card-title titles">
-                        <h2> Contenedor </h2>
-                    </div>
-                    <form action="" method="POST" class="form-components" id="form_content_template">
-                        {% csrf_token %}
-                        <div class="form-components" id="form-template">
-                            <!-- Componentes del formulario se agregarán aquí -->
-
-                        </div>
-                        <button type="submit" class="btn btn-primary save-button">Guardar</button>
-                    </form>
-
-                </div>
-
-            </div>
-
-
-        </div>
-
-    </div>
-
-    <div class="modal fade" id="btn_modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal fade" id="btn_modal_related" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
         <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <!-- <div class="modal-header"> -->
                 <div class="modal-header">
                     <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
-                                    data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
+                            <button class="nav-link active" id="pills-display-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-display" type="button" role="tab" aria-controls="pills-display"
                                     aria-selected="true">Display
                             </button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
-                                    data-bs-target="#pills-profile" type="button" role="tab"
-                                    aria-controls="pills-profile" aria-selected="false">Validation
+                            <button class="nav-link" id="pills-validate-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-validate" type="button" role="tab"
+                                    aria-controls="pills-validate" aria-selected="false">Validation
                             </button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill"
-                                    data-bs-target="#pills-contact" type="button" role="tab"
-                                    aria-controls="pills-contact" aria-selected="false">Conditional
+                            <button class="nav-link" id="pills-conditional-tab" data-bs-toggle="pill"
+                                    data-bs-target="#pills-conditional" type="button" role="tab"
+                                    aria-controls="pills-conditional" aria-selected="false">Conditional
                             </button>
                         </li>
                     </ul>
@@ -87,12 +34,12 @@
                     <!-- ACA VA EL TAB PARA PODER GUARDAR -->
 
                     <div class="tab-content" id="pills-tabContent">
-                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
-                             aria-labelledby="pills-home-tab">
+                        <div class="tab-pane fade show active" id="pills-display" role="tabpanel"
+                             aria-labelledby="pills-display-tab">
                             <!-- ACA VA EL: LABELNAME, LABELPOSITION, PLACEHOLDER Y EL DESCRIPTION -->
                             <div class="form-group">
                                 <label for="labelname">Label</label>
-                                <input type="text" class="form-control modal-label-value" value="">
+                                <input type="text" class="form-control modal-label" value="">
                             </div>
 
                             <div class="form-group">
@@ -120,8 +67,8 @@
                             </div>
                             <!-- END -->
                         </div>
-                        <div class="tab-pane fade" id="pills-profile" role="tabpanel"
-                             aria-labelledby="pills-profile-tab">
+                        <div class="tab-pane fade" id="pills-validate" role="tabpanel"
+                             aria-labelledby="pills-validate-tab">
                             <div class="form-check">
                                 <input class="form-check-input modal-required" type="checkbox" id="required">
                                 <label class="form-check-label" for="required">
@@ -144,15 +91,11 @@
                                 <input type="number" class="form-control modal-step" value="" step="0.1">
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="pills-contact" role="tabpanel"
-                             aria-labelledby="pills-contact-tab">
-                            <div class="form-group clearfix">
-                                <label for="minimumlength" class="float-start">Add question</label>
-                                <button type="button" class="btn btn-primary float-end" id="btn_add_question">+</button>
-                            </div>
+                        <div class="tab-pane fade" id="pills-conditional" role="tabpanel"
+                             aria-labelledby="pills-conditional-tab">
                             <div class="form-group">
                                 <label for="minimumlength">Evaluate</label>
-                                <input type="number" class="form-control modal-evaluate" value="" step="0.1">
+                                <input type="number" class="form-control modal-min" value="" step="0.1">
                             </div>
                         </div>
                         <input type="hidden" id="current_data_id" value="">
@@ -165,24 +108,3 @@
             </div>
         </div>
     </div>
-
-    {% include "modal_conditional.html" %}
-
-</div>
-
-
-{% endblock %}
-
-{% block js %}
-
-<script>
-    document.form_url = {};
-    document.form_url.form_api = "{% url 'api' data.pk %}";
-    document.input_setting = "{% url 'inputsettings-list' %}";
-    document.number_field = "{% url 'numberinputfields-list' %}";
-</script>
-<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"
-        integrity="sha256-eTyxS0rkjpLEo16uXTS0uVCS4815lc40K2iVpWDvdSY=" crossorigin="anonymous"></script>
-<script src="{% static 'js/widget.js' %}"></script>
-<script src="{% static 'js/field_number.js' %}"></script>
-{% endblock %}

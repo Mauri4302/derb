@@ -74,7 +74,7 @@ form = {
                     "step": 0.1
             },
                 "conditional": {
-                "quetion_related": '',
+                "quetion_related": [''],
                 "evaluate": "prueba"
             },
         }
